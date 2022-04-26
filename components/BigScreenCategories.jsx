@@ -5,12 +5,17 @@ import { BsCartPlus } from 'react-icons/bs';
 import DisplayMobileCategory from './DisplayMobileCategory';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper'
-
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css/autoplay';
 const BigScreenCategories = () => {
     const cateProd = [
         {
             cid: 1,
             title: 'Popular on T-shirts',
+            link: '/categories/tshirts',
             product: [
                 {
                     id: 1,
@@ -25,7 +30,7 @@ const BigScreenCategories = () => {
                     id: 2,
                     name: 'Basic Tee',
                     href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
                     price: '$35',
                     color: 'Black',
@@ -34,7 +39,7 @@ const BigScreenCategories = () => {
                     id: 3,
                     name: 'Basic Tee',
                     href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-03.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
                     price: '$35',
                     color: 'Black',
@@ -43,7 +48,7 @@ const BigScreenCategories = () => {
                     id: 4,
                     name: 'Basic Tee',
                     href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-04.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
                     price: '$35',
                     color: 'Black',
@@ -61,7 +66,7 @@ const BigScreenCategories = () => {
                     id: 6,
                     name: 'Basic Tee',
                     href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
                     price: '$35',
                     color: 'Black',
@@ -107,6 +112,7 @@ const BigScreenCategories = () => {
         {
             cid: 2,
             title: 'Popular on Footwears',
+            link: '/categories/footwears',
             product: [
                 {
                     id: 1,
@@ -204,8 +210,8 @@ const BigScreenCategories = () => {
     ]
 
 
+    SwiperCore.use([Navigation, Pagination, Autoplay])
 
-    const slides = []
     return (
         <>
             <div>
@@ -220,7 +226,7 @@ const BigScreenCategories = () => {
                             <div className="title flex justify-between items-center py-5 px-3 md:px-10 " key={cp.cid}>
                                 <h2 className='text-2xl font-bold'> {cp.title}</h2>
                                 <ul className="see-more list-none">
-                                    <Link href={'/popular'}><a className='text-purple-500 font-semibold underline'>See More</a></Link>
+                                    <Link href={cp.link}><a className='text-purple-500 font-semibold underline'>See More</a></Link>
                                 </ul>
                             </div>
 

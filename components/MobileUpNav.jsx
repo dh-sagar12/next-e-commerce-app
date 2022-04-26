@@ -2,12 +2,17 @@ import React from 'react'
 import Image from 'next/dist/client/image'
 import Link from 'next/dist/client/link'
 import { BsSearch, BsCartPlus } from 'react-icons/bs'
+import { useSelector } from 'react-redux'
+
 
 
 const MobileUpNav = () => {
+    let cartitem = useSelector(state =>state.cartSlice.cart)
+    
+    
     return (
         <>
-            <header className=" w-full">
+            <header className=" w-full fixed z-20">
                 <nav className="flex justify-between flex-col w-full bg-slate-900 text-white py-2 ">
                     <div className='flex justify-between px-2 items-center md:pb-3'>
                         <Link href={'/'} className=''>
@@ -25,13 +30,13 @@ const MobileUpNav = () => {
                                     <Link href={'/categories'}><a className='hover:text-purple-500 text-md font-semibold'>Categories </a></Link>
                                 </li>
                                 <li>
-                                    <Link href={'/popular'}><a className='hover:text-purple-500 text-md font-semibold'>Trending </a></Link>
+                                    <Link href={'/popular'}><a className='hover:text-purple-500 text-md font-semibold'>Track My Orders </a></Link>
                                 </li>
                                 <li>
                                     <Link href={'/contact'}><a className='hover:text-purple-500 text-md font-semibold'>Contact </a></Link>
                                 </li>
                                 <li>
-                                    <Link href={'/about'}><a className='hover:text-purple-500 text-md font-semibold'>About </a></Link>
+                                    <Link href={'/about'}><a className='hover:text-purple-500 text-md font-semibold'>Customer Care </a></Link>
                                 </li>
                             </ul>
                         </div>
@@ -48,7 +53,12 @@ const MobileUpNav = () => {
                                 <input type="text" className='focus:outline-none text-black w-full rounded-sm px-1 text-lg md:px-3 md:py-2' placeholder='Search Items' />
                                 <button type="submit" className='bg-purple-500 px-1 mx-1 rounded-sm py-1 sm:px-3'><BsSearch /></button>
                                 <Link href={'/cart'} >
-                                    <a className='text-3xl mx-3 pt-1 hidden md:block'><BsCartPlus /></a>
+                                    <a className='text-3xl mx-3 pt-1 hidden md:block relative'>
+                                        <BsCartPlus />
+                                        <span className=" p-[3px] leading-none opacity-95  border-white item-number absolute top-0 -right-2 text-[13px] bg-red-700 rounded-full">
+                                            <span className='m-1'>{cartitem.length}</span>
+                                        </span>
+                                    </a>
                                 </Link>
                             </div>
                         </div>
@@ -59,4 +69,4 @@ const MobileUpNav = () => {
     )
 }
 
-export default MobileUpNav
+export default MobileUpNav;

@@ -1,105 +1,128 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { BsCartPlus } from 'react-icons/bs'
-import MobileFooter from './MobileFooter'
+import { useDispatch } from 'react-redux'
+import { addItem } from '../redux/cart/cartSlice'
 
 
 
 const products = [
   {
     id: 1,
-    name: 'Basic Tee',
+    name: 'Basic Tee 1',
     href: '#',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: 12,
+    color: 'bg-[#ff0000]',
+    size: 'xl'
   },
   {
     id: 2,
-    name: 'Basic Tee',
+    name: 'Basic Tee 2' ,
     href: '#',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: 12,
+    color: 'bg-[#ff0000]',
+    size: 'xl'
   },
   {
     id: 3,
-    name: 'Basic Tee',
+    name: 'Basic Tee 3',
     href: '#',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: 12,
+    color: 'bg-[#ff0000]',
+    size: 'xl'
   },
   {
     id: 4,
-    name: 'Basic Tee',
+    name: 'Basic Tee 4',
     href: '#',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: 12,
+    color: 'bg-[#ff0000]',
+    size: 'xl'
   },
   {
     id: 5,
-    name: 'Basic Tee',
+    name: 'Basic Tee 5',
     href: '#',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: 12,
+    color: 'bg-[#ff0000]',
+    size: 'xl'
   },
   {
     id: 6,
-    name: 'Basic Tee',
+    name: 'Basic Tee 6',
     href: '#',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: 12,
+    color: 'bg-[#ff0000]',
+    size: 'xl'
   },
   {
     id: 7,
-    name: 'Basic Tee',
+    name: 'Basic Tee 7',
     href: '#',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: 12,
+    color: 'bg-[#ff0000]',
+    size: 'xl'
   },
   {
     id: 8,
-    name: 'Basic Tee',
+    name: 'Basic Tee 8',
     href: '#',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: 12,
+    color: 'bg-[#ff0000]',
+    size: 'xl'
   },
   {
     id: 9,
-    name: 'Basic Tee',
+    name: 'Basic Tee 9',
     href: '#',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: 12,
+    color: 'bg-[#ff0000]',
+    size: 'xl'
   },
   {
     id: 10,
-    name: 'Basic Tee',
+    name: 'Basic Tee 10',
     href: '#',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: 12,
+    color: 'bg-[#ff0000]',
+    size: 'xl'
   }
   // More products...
 ]
 
 const DisplayItems = () => {
+  const dispatch = useDispatch();
+
+
+
+  const handleAddItem = (product) => {
+    console.log(product);
+    dispatch(addItem(product))
+  }
+
+  
+
+
   return (
     <>
       <div className="bg-slate-50 md:py-6">
@@ -125,10 +148,12 @@ const DisplayItems = () => {
                             {product.name}
                           </a>
                         </h3>
-                        <p className="text-sm font-medium text-gray-400">{product.price}</p>
+                        <p className="text-sm font-medium text-gray-400">${product.price}</p>
                       </div>
                       <div>
-                        <BsCartPlus className='text-xl self-center cursor-pointer hover:text-purple-500' />
+                        <button onClick={() => handleAddItem({ ...product, cartvalue: 1 })}>
+                          <BsCartPlus className='text-xl self-center cursor-pointer hover:text-purple-500' />
+                        </button>
                       </div>
                     </div>
                   </div>
