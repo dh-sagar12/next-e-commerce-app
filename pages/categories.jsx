@@ -32,11 +32,13 @@ const Categories = () => {
   return (
     <>
       <div className=" bg-slate-50 ">
-
-        {
-          Mobile ?
-            <DisplayMobileCategory /> : <BigScreenCategories/>}
+        <div className='pt-12'>
+          {
+            Mobile ?
+              <DisplayMobileCategory /> : <BigScreenCategories />}
+        </div>
       </div>
+
     </>
   )
 }

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import Link from 'next/dist/client/link'
-import { BsCartPlus } from 'react-icons/bs';
+import AddToCartBtn from './AddToCartBtn';
 import DisplayMobileCategory from './DisplayMobileCategory';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper'
@@ -10,6 +10,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/autoplay';
+import ProductCard from './ProductCard';
 const BigScreenCategories = () => {
     const cateProd = [
         {
@@ -23,7 +24,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 35,
                     color: 'Black',
                 },
                 {
@@ -32,7 +33,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -41,7 +42,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-03.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -50,7 +51,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-04.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -59,7 +60,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -68,7 +69,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -77,7 +78,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -86,7 +87,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -95,7 +96,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -104,7 +105,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 }
             ]
@@ -120,7 +121,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -129,7 +130,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -138,7 +139,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -147,7 +148,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -156,7 +157,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -165,7 +166,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -174,7 +175,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -183,7 +184,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -192,7 +193,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 },
                 {
@@ -201,7 +202,7 @@ const BigScreenCategories = () => {
                     href: '#',
                     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
                     imageAlt: "Front of men's Basic Tee in black.",
-                    price: '$35',
+                    price: 32,
                     color: 'Black',
                 }
             ]
@@ -240,28 +241,7 @@ const BigScreenCategories = () => {
                                     return (
                                         <>
                                             <SwiperSlide key={prod.id} tag='li' >
-                                                <div className="group relative p-1 border border-purple-200  rounded-md transition duration-500 hover:scale-105 hover:shadow-md cursor-pointer " >
-                                                    <div className="w-full min-h-80  rounded overflow-hidden  aspect-auto">
-                                                        <img
-                                                            src={prod.imageSrc}
-                                                            alt={prod.name}
-                                                            className="w-full h-full object-center object-cover lg:h-3/4  lg:w-auto md:hover:scale-110 duration-100"
-                                                        />
-                                                    </div>
-                                                    <div className="mt-4 flex justify-between pb-2 px-2 items-center">
-                                                        <div>
-                                                            <h3 className="text-sm text-gray-900 font-semibold">
-                                                                <a href={prod.href}>
-                                                                    {prod.name}
-                                                                </a>
-                                                            </h3>
-                                                            <p className="text-sm font-medium text-gray-400">{prod.price}</p>
-                                                        </div>
-                                                        <div>
-                                                            <BsCartPlus className='text-xl self-center cursor-pointer hover:text-purple-500' />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <ProductCard product={prod} />
                                             </SwiperSlide>
                                         </>
                                     )
@@ -279,3 +259,4 @@ const BigScreenCategories = () => {
 }
 
 export default BigScreenCategories;
+

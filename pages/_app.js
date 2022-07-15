@@ -4,13 +4,21 @@ import MobileUpNav from '../components/MobileUpNav'
 import MobileFooter from '../components/MobileFooter'
 import { wrapper } from '../redux/store'
 
+
 function MyApp({ Component, pageProps }) {
-  return <>
-      <MobileUpNav/>
-      <Component {...pageProps} />
-      <MobileFooter/>
-      <MobileNav/>
-    </>
+
+  switch (Component.displayName) {
+    case 'Dashboard':
+      return <Component {...pageProps} />
+      
+    default:
+      return <>
+          <MobileUpNav/>
+          <Component {...pageProps} />
+          <MobileFooter/>
+          <MobileNav/>
+        </>
+  }
   
 }
 

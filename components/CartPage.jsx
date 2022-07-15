@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { AiOutlinePlus, AiOutlineMinus, AiFillMinusCircle } from 'react-icons/ai'
 import { useSelector, useDispatch } from 'react-redux'
 import { increasecartItemvalue, decreasecartItemvalue, removeItem } from '../redux/cart/cartSlice';
-import Scrollbar from '';
+import Scrollbars from 'react-custom-scrollbars-2';
 
 
 
@@ -53,13 +53,13 @@ const CartPage = () => {
 
                 {Cart.length > 0 ?
                     <div className="flex flex-col justify-center items-center md:items-start  mx-4 md:flex-row md:justify-between md:mx-1">
-                        <div className="items-box  md:flex-grow lg:flex-auto  ">
-                            <Scrollbar>
+                        <div className="items-box  md:flex-grow lg:flex-auto mb-8 ">
+                            <Scrollbars autoHeight autoHeightMin={450}>
                                 {
                                     Cart.map((cartItem) => {
                                         return (
                                             <div key={cartItem.id}>
-                                                <div className=' w-full sm:w-5/6 sm:mx-auto border rounded-lg bg-purple-50 border-purple-100 shadow-sm relative my-1 md:mx-1 md:w-11/12 lg:w-4/5 lg:mx-auto lg:px-5' >
+                                                <div className=' w-full sm:w-5/6 sm:mx-auto border rounded-lg bg-purple-50 border-purple-100 shadow-sm relative my-1 md:mx-1 md:w-11/12 lg:w-[600px] lg:mx-auto lg:px-5' >
                                                     <div className=' text-2xl right-2 text-red-600 absolute top-2 cursor-pointer hover:text-red-500 hover:scale-125 transition-all duration-200' onClick={() => removecartItems(cartItem.id)}>
                                                         <AiFillMinusCircle />
                                                     </div>
@@ -97,13 +97,13 @@ const CartPage = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <hr className='  w-full my-3 bg-slate-500 md:w-5/6 lg:mx-auto' />
+                                                <hr className='  w-full my-3 bg-slate-500 md:w-5/6 lg:w-[600px] lg:mx-auto' />
 
                                             </div>
                                         )
                                     })
                                 }
-                            </Scrollbar>
+                            </Scrollbars>
                         </div>
                         <div className="bill-box border rounded-md bg-purple-100 w-full p-4 flex flex-col sm:px-16 sm:space-y-5 sm:w-5/6 sm:mx-auto md:w-3/4 md:mx-0 md:px-7 md:py-5 lg:w-1/3">
                             <div className="box flex  bg-purple-50 w-full px-4 py-3 flex-col rounded-lg sm:py-8 ">
@@ -114,7 +114,7 @@ const CartPage = () => {
                                     <p className='text-lg'>Subtotal: <span className='font-semibold'>${subTotalPrice}</span> </p>
                                     <p className='text-lg'>Delivery: <span className='font-semibold text-base text-orange-500'>Free</span></p>
                                     <p className='text-lg pb-2 border-b-2 border-purple-700'>Tax: <span className='font-semibold'>${(subTotalPrice * 0.13).toFixed(2)}</span></p>
-                                    <p className='text-lg indent-1'>Total: <span className='font-semibold'>${(subTotalPrice - (subTotalPrice * 0.13)).toFixed(2)}</span></p>
+                                    <p className='text-lg indent-1'>Total: <span className='font-semibold'>${(subTotalPrice + (subTotalPrice * 0.13)).toFixed(2)}</span></p>
                                 </div>
 
                             </div>
