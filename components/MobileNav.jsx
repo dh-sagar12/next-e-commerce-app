@@ -5,9 +5,9 @@ import { BiCategory } from 'react-icons/bi'
 import { BsCartPlus } from 'react-icons/bs'
 import { VscAccount } from 'react-icons/vsc'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
-    ; const MobileNav = () => {
+    const MobileNav = () => {
         const [Active, setActive] = useState(true)
         let cartitem = useSelector(state =>state.cartSlice.cart)
         return (
