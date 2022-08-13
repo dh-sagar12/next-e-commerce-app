@@ -20,11 +20,9 @@ const AppLayout = (props) => {
                 <Layout>
                     <DashboardHeader collapsed={collapsed} setCollapsed={setCollapsed} />
                     <Content className='mx-3 my-5  h-screen  bg-white border-gray-100 border rounded-md shadow-md' >
-                        <Scrollbars autoheight='true' autoHeightMin='screen'>
-                            <div className='h-screen'>
+                            <div className='h-screen overflow-scroll'>
                                 <Component {...pageProps} />
                             </div>
-                        </Scrollbars>
                     </Content>
                 </Layout>
             </Layout>

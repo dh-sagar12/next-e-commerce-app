@@ -8,12 +8,14 @@ import {
 
 import { Layout, Menu } from 'antd';
 import 'antd/dist/antd.css';
-import Link from 'next/link';
+import Router from  'next/router';
 const { Sider } = Layout;
 
 
 const Sidebar = (props) => {
     let {collapsed} = props
+
+
 
     const items = [
         {
@@ -44,24 +46,18 @@ const Sidebar = (props) => {
         }
     ]
 
+    const handleMenuClick  = (item)=>{
+        console.log(item);
+        Router.push(item.item.props.href)
+        
+    }
+
     return (
         <>
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="logo h-16 w-5 " />
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                    {
-
-                        items.map((elem, index) => {
-                            return (
-                                <Menu.Item key={elem.key} icon={elem.icon} >
-                                    <Link href={elem.href}>
-                                        {elem.label}
-                                    </Link>
-                                </Menu.Item>
-                            )
-                        })
-
-                    }
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items}  onSelect={handleMenuClick}>
+                   
                 </Menu>
             </Sider>
         </>

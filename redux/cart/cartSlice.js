@@ -11,7 +11,6 @@ const cartSlice = createSlice({
     reducers: {
         addItem: (state, action) => {
             let tempItem = state.cart.find(item => item.id === action.payload.id)
-            console.log(tempItem);
             if (tempItem === undefined) {
                 state.cart = [...state.cart, action.payload]
             }

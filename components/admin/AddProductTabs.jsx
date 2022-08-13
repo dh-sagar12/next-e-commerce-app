@@ -1,36 +1,39 @@
 import React from 'react'
 import { Tabs } from 'antd';
 const { TabPane } = Tabs;
-import { Button, Checkbox, Form, Input } from 'antd';
+import AddProductForm from './AddProductForm';
+import { useState } from 'react';
+import ProductItems from './ProductItems';
+import {  useDispatch } from 'react-redux'
+
+
 
 
 const AddProductTabs = () => {
-    const onFinish = (values) => {
-        console.log('Success:', values);
-      };
-    
-      const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-      };
-    const tabs = [
-        {
-            title: 'Product Details',
-            key: 1,
 
+    
+ 
+    const [activeTabKey, setActiveTabKey] = useState("1")
+    const [FormFinished, setFormFinished] = useState(false)
+    const dispatch = useDispatch()
+
+    const handleTabClick = (key) => {
+        if (FormFinished && key < activeTabKey ){
+            setActiveTabKey(key)
         }
-    ]
+    }
+
+
     return (
         <>
-            <Tabs defaultActiveKey="1">
-                <TabPane tab="Tab 1" key="1">
-                    tab 1
+            <Tabs activeKey={activeTabKey} size='large' className='font-extrabold' onTabClick={handleTabClick} >
+                <TabPane tab="Product" key="1"  >
+                    <AddProductForm setActiveTabKey={setActiveTabKey} setFormFinished={setFormFinished} />
                 </TabPane>
-                <TabPane tab="Tab 2" key="2">
-                    
+                <TabPane tab="Product Items" key="2" >
+                   <ProductItems setActiveTabKey={setActiveTabKey} setFormFinished={setFormFinished}/>
                 </TabPane>
-                <TabPane tab="Tab 3" key="3">
-                    
-                </TabPane>
+              
             </Tabs>
         </>
     )
