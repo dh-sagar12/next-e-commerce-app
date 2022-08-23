@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import React from 'react'
 import AddToCartBtn from './AddToCartBtn';
+import { message } from 'antd';
 
 const ProductCard = ({ product }) => {
   return (
@@ -20,7 +21,7 @@ const ProductCard = ({ product }) => {
           <Link href={`/product/${product.id}-${product.slug}`} passHref>
             <div>
               <h3 className="text-sm text-gray-900 font-semibold">
-                <a href={product.href}>
+                <a href={product.href} className='text-black' onClick={()=>{message.info('clicked')}}>
                   {product.name}
                 </a>
               </h3>

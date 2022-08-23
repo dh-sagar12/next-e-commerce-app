@@ -41,40 +41,40 @@ const ProductItems = (props) => {
 
 
 
-    useEffect(() => {
-        console.log(attributeValue);
-        setProductItemState((preval) => {
-            console.log('running');
-            return { ...preval, attributeValue }
-        })
-    }, [attributeValue])
+    // useEffect(() => {
+    //     setProductItemState((preval) => {
+    //         return { ...preval, attributeValue }
+    //     })
+    // }, [attributeValue])
 
 
-    useEffect(() => {
-        setProductItemState((preval) => {
-            return { ...preval, fileList }
-        })
-    }, [fileList])
+    // useEffect(() => {
+    //     setProductItemState((preval) => {
+    //         return { ...preval, fileList }
+    //     })
+    // }, [fileList])
 
 
     useEffect(() => {
       axios.get('http://127.0.0.1:8000/api/get-attribute/').then(res=> {
         setFetchedAttributes(res.data)
       }).catch(e=>{
-        message.error(e)
+        message.error(e.message)
       })
     }, [])
     
 
-    useEffect(() => {
-        // console.log(newProduct);
-    }, [newProduct])
+    // useEffect(() => {
+    //     console.log(newProduct);
+    // }, [newProduct])
 
+    useEffect(() => {
+        // console.log(fileList);
+    }, [fileList])
 
     useEffect(() => {
-    //  console.log(ProductItemState);
-    }, [ProductItemState])
-    
+        // console.log(attributeValue);
+    }, [attributeValue])
 
 
 
@@ -176,8 +176,13 @@ const ProductItems = (props) => {
     }
 
     const handleSaveProduct = () => {
+        console.log(newProduct[0]);
         console.log(ProductItemState);
+        console.log(fileList);
+        console.log(attributeValue);
+
         const formData = new FormData();
+        
         fileList.forEach((file) => {
             formData.append('uploaded_images', file);
         });
@@ -186,23 +191,20 @@ const ProductItems = (props) => {
             let attr_value =  JSON.stringify(pair)
             formData.append('attributes_value', attr_value)
         })
-        formData.append('product_id', 1)
-        formData.append('store_price', ProductItemState.store_price)
-        formData.append('discount', ProductItemState.discount)
-        formData.append('retail_price', ProductItemState.retail_price)
-        formData.append('is_active', ProductItemState.is_active)
-        formData.append('is_default', ProductItemState.is_default)
+        formData.append('product', JSON.stringify(newProduct[0]))
+        formData.append('product_item', JSON.stringify(ProductItemState))
 
         setUploading(true);
 
-        fetch('http://localhost:8000/api/add-product-inventory/', {
+        fetch('http://localhost:8000/api/add-full-product/', {
             method: 'POST',
             body: formData
         })
             .then((res) => res.json())
             .then((data) => {
                 if (data.status == 200) {
-                    message.success(data.success)
+                    console.log(data.msg);
+                    message.success(`${data.msg}`)
                     setFileList([]);
                     setProductItemState({})
                     setAttributeValue([])
@@ -212,15 +214,20 @@ const ProductItems = (props) => {
 
                 }
                 else {
-                    // console.log(data.errors)
-                    for (let [key, value] of Object.entries(data.errors)) {
-                        message.error(`${key}:${value}`)
+                    console.log(data)
+                    if (data.error !== undefined){
+                        message.error(`${data.error}`)
                     }
+                    else{
+
+                        message.error(`${JSON.stringify(data.errors)}`)
+                    }
+                   
                 }
 
             })
             .catch((e) => {
-                message.error(`upload failed with error${e}`);
+                message.error(`${e.error}`);
             })
             .finally(() => {
                 setUploading(false);
@@ -232,13 +239,12 @@ const ProductItems = (props) => {
 
     const handleOnchangeInput = (e) => {
         setProductItemState(form.getFieldsValue(e))
-        setProductItemState((preval) => {
-            return { ...preval, attributeValue, fileList }
-        })
+        // setProductItemState((preval) => {
+        //     return { ...preval, attributeValue, fileList }
+        // })
 
     }
 
-    // form.getFieldValue(e) , ...attributeValue
 
 
 
@@ -246,8 +252,8 @@ const ProductItems = (props) => {
         <>
             <Form form={form} layout="vertical" onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off" className="flex" initialValues={{ is_active: true, is_default: true }} >
                 <div className="w-1/2">
-                    <Form.Item name="product_name" label="Product Name" initialValue={newProduct[0].product_name}>
-                        <Input disabled={true}   />
+                    <Form.Item  label="Product Name" >
+                    <Input disabled={true}  prefix={newProduct[0].product_name} />
                     </Form.Item>
                     <Row >
                         <Space size={'large'}>
@@ -332,28 +338,12 @@ const ProductItems = (props) => {
                         className='flex items-center border-gray-50 hover:text-purple-500 hover:border-purple-400 text-gray-600 space-x-4 w-full justify-center bg-purple-50'>
                         <BiSitemap /> Save Product
                     </Button>
-
-
-                    {/* <Space size={'large'}>
-                        <Button type="primary" onClick={handleProductAddition} className='flex items-center bg-slate-800 border-none hover:bg-purple-500'>
-                            Next <ArrowRightOutlined />
-                        </Button>
-
-                        <Link href={'/admin/product'}>
-                            <Button type="primary" className='flex items-center bg-slate-800 border-none hover:bg-purple-500'>
-                                <CloseSquareOutlined /> Cancel
-                            </Button>
-                        </Link>
-
-
-                    </Space> */}
                 </div>
 
 
                 <Row className='ml-24 w-1/2'>
                     <Form.Item label={'Images(max: 3 & min: 1(required)'} >
                         <ImageUploader fileList={fileList} setFileList={setFileList} />
-                        {/* <InputNumber type='number' onChange={() => handleOnchangeInput(Item.name)} /> */}
 
                     </Form.Item>
                 </Row>
