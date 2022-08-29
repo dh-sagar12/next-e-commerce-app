@@ -23,16 +23,7 @@ const AddProductForm = (props) => {
 
     const [SubCategoryData, setSubCategoryData] = useState([])
 
-    const areas = [
-        {
-            label: 'Beijing',
-            value: 'Beijing',
-        },
-        {
-            label: 'Shanghai',
-            value: 'Shanghai',
-        },
-    ];
+    
 
     const [form] = Form.useForm();
 
