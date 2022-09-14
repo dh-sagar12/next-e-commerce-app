@@ -55,41 +55,8 @@ const ImageUploader = (props) => {
     </div>
   );
 
-  const handleUpload = async () => {
-    // const formData = new FormData();
-    // fileList.forEach((file) => {
-    //   console.log(file);
-    //   formData.append('file_name[]', file);
-    // });
-    // for (const data in formData.values()){
-    //   console.log(data);
-    // }
 
-    // formData.append('product_inventory_id', 1)
-
-    // setUploading(true); 
-
-    // fetch('http://localhost:8000/api/upload-image/', {
-    //   method: 'POST',
-    //   body: formData
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     setFileList([]);
-    //     message.success('upload successfully.');
-
-    //   })
-    //   .catch((e) => {
-    //     message.error(`upload failed with error${e}`);
-    //   })
-    //   .finally(() => {
-    //     setUploading(false);
-    //   });
-  };
-
-
-  const handlePreviewFile = ()=>{
+  const handlePreviewFile = () => {
 
   }
 
@@ -109,17 +76,23 @@ const ImageUploader = (props) => {
   return (
     <>
       <Upload
-        isImageUrl = {()=>true}
+        isImageUrl={() => true}
         listType="picture-card"
         fileList={fileList}
         // onPreview={handlePreview}
-        previewFile = {handlePreviewFile}
+        previewFile={handlePreviewFile}
         // onChange={handleChange}
         {...properties}
         multiple={true}
-        
+
       >
-        {fileList.length >= 3 ? null : uploadButton}
+        {
+          props.count != undefined ?
+            (props.count +
+              fileList.length) >= 3 ? null : uploadButton
+            :
+            fileList.length >= 3 ? null : uploadButton
+        }
       </Upload>
       <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
         <img
@@ -130,7 +103,7 @@ const ImageUploader = (props) => {
           src={previewImage}
         />
       </Modal>
-     
+
 
 
     </>

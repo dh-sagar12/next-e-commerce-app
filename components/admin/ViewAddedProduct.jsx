@@ -7,12 +7,14 @@ import axios from "axios";
 import EditProductData from "./EditProductData";
 import PreviewImages from "./PreviewImages";
 import AddProductItem from "./AddProductItem";
+import { useRouter } from "next/router";
 
 
 
 const ViewAddedProduct = () => {
     const base_url = process.env.baseURL
     const [ProductData, setProductData] = useState([])
+    const router  =  useRouter()
 
 
     useEffect(() => {
@@ -35,17 +37,19 @@ const ViewAddedProduct = () => {
 
         element.product_items.forEach((items, index) => {
             second_level_data = {
+                key: items.id,
                 id: items.id,
                 store_price: items.store_price,
                 discount: items.discount,
                 retail_price: items.retail_price,
                 is_default: items.is_default.toString(),
                 is_active: items.is_active.toString(),
-                image: items.images[0].file_name
+                image:items.images.length>0 ? items.images[0].file_name : ''
             }
         })
 
         fakeFirstLevelData.push({
+            key: element.id,
             id: element.id,
             sn: index + 1,
             product_name: element.product_name,
@@ -118,7 +122,7 @@ const ViewAddedProduct = () => {
                         <Image
                             width={100}
                             src={`${base_url}${record.image}`}
-                            getContainer='#img-prevew'
+                            
 
                         />
                     </div>
@@ -158,8 +162,8 @@ const ViewAddedProduct = () => {
         {
             title: 'Action',
             key: 'operation',
-            render: () => (
-                <a><EditOutlined /></a>
+            render: (record) => (
+                <a><EditOutlined onClick={()=>handleEditProductItems(record.id)}/></a>
             )
         },
     ]
@@ -175,6 +179,10 @@ const ViewAddedProduct = () => {
                 showHeader={true}
             />
         )
+    }
+
+    const handleEditProductItems =(id)=>{
+        router.push(`/admin/product/item/${id}`)
     }
 
 

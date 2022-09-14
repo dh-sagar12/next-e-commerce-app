@@ -21,12 +21,10 @@ const ProductItems = (props) => {
 
     const newProduct = useSelector(state => state.newProductSlice.new_product)
     
-    // const attributevalue = []
 
     const dispatch = useDispatch()
     const [form] = Form.useForm();
-    // const [isDefaultChecked, setIsDefaultChecked] = useState(true)
-    // const [isActiveChecked, setIsActiveChecked] = useState(true)
+
     const [attributeValue, setAttributeValue] = useState([])
     const [KeyvalueAttributePair, setKeyvalueAttributePair] = useState({
         attribute_id: "",
@@ -41,19 +39,6 @@ const ProductItems = (props) => {
 
 
 
-    // useEffect(() => {
-    //     setProductItemState((preval) => {
-    //         return { ...preval, attributeValue }
-    //     })
-    // }, [attributeValue])
-
-
-    // useEffect(() => {
-    //     setProductItemState((preval) => {
-    //         return { ...preval, fileList }
-    //     })
-    // }, [fileList])
-
 
     useEffect(() => {
       axios.get('http://127.0.0.1:8000/api/get-attribute/').then(res=> {
@@ -63,19 +48,6 @@ const ProductItems = (props) => {
       })
     }, [])
     
-
-    // useEffect(() => {
-    //     console.log(newProduct);
-    // }, [newProduct])
-
-    useEffect(() => {
-        // console.log(fileList);
-    }, [fileList])
-
-    useEffect(() => {
-        // console.log(attributeValue);
-    }, [attributeValue])
-
 
 
 
@@ -88,14 +60,11 @@ const ProductItems = (props) => {
 
     }
 
-
-    const onFinishFailed = () => {
-        // console.log('onFinishFailed');
-        // message.error('Product added failed')
-
+    const onFinishFailed = ()=>{
+        console.log('on finish failed');
     }
 
-    let checkForDuplicate = (KeyvalueAttributePair) => {
+    const checkForDuplicate = (KeyvalueAttributePair) => {
         let addedAttribute = []
         attributeValue.forEach((elem) => {
             addedAttribute.push(elem.attribute_id)
@@ -107,15 +76,6 @@ const ProductItems = (props) => {
             return false
         }
 
-        // attributeValue.forEach((elem)=>{
-
-        //     if(elem.attribute_id === KeyvalueAttributePair.attribute_id){
-        //         return true
-        //     }
-        //     else{
-        //         return false
-        //     }
-        // })
     }
 
     const getAttributeNameViaId =  (id)=>{
@@ -239,9 +199,7 @@ const ProductItems = (props) => {
 
     const handleOnchangeInput = (e) => {
         setProductItemState(form.getFieldsValue(e))
-        // setProductItemState((preval) => {
-        //     return { ...preval, attributeValue, fileList }
-        // })
+        
 
     }
 
@@ -297,7 +255,7 @@ const ProductItems = (props) => {
                                     name="attribute_id"
                                     value={KeyvalueAttributePair.attribute_id}
                                     onChange={handleChangeOnAttribute}
-                                // onChange={() => handleOnchangeInput(Item.name)}
+                               
                                 >
                                     {
                                         FetchedAttributes.map((attr, ind)=>{
