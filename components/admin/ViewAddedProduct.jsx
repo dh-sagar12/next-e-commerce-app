@@ -5,7 +5,6 @@ import { EditOutlined } from "@ant-design/icons";
 import { useEffect } from "react";
 import axios from "axios";
 import EditProductData from "./EditProductData";
-import PreviewImages from "./PreviewImages";
 import AddProductItem from "./AddProductItem";
 import { useRouter } from "next/router";
 
@@ -31,12 +30,15 @@ const ViewAddedProduct = () => {
     const fakeFirstLevelData = []
 
 
+    useEffect(() => {
+        console.log(ProductData)
+    }, [ProductData])
+    
+
     ProductData.forEach((element, index) => {
-
-        let second_level_data = {}
-
+        let second_level_data = []
         element.product_items.forEach((items, index) => {
-            second_level_data = {
+            let  second_level = {
                 key: items.id,
                 id: items.id,
                 store_price: items.store_price,
@@ -46,6 +48,7 @@ const ViewAddedProduct = () => {
                 is_active: items.is_active.toString(),
                 image:items.images.length>0 ? items.images[0].file_name : ''
             }
+            second_level_data.push(second_level)
         })
 
         fakeFirstLevelData.push({
@@ -61,7 +64,10 @@ const ViewAddedProduct = () => {
         })
 
     })
-    console.log(fakeFirstLevelData)
+
+    // console.log('second_level_data', second_level_data);
+
+    // console.log('fake_first_data', fakeFirstLevelData)
 
 
     const firstLevelColumns = [
@@ -105,7 +111,7 @@ const ViewAddedProduct = () => {
             render: (record) => (
                 <Space className="text-xl">
                     <a><EditProductData product_id = {record.id} /></a>
-                    <a><AddProductItem product_id= {record.id}/></a>
+                    <a><AddProductItem product_id= {record.id} product_name={record.product_name}/></a>
                 </Space>
             ),
         },
@@ -168,13 +174,11 @@ const ViewAddedProduct = () => {
         },
     ]
     const firstExpandedRow = (record, index, indent, expanded) => {
-        let data = []
-        data.push(record.secondLevel)
         return (
             <Table
                 // rowKey={record => record.}
                 columns={secondLevelColumns}
-                dataSource={data}
+                dataSource={record.secondLevel}
                 pagination={false}
                 showHeader={true}
             />

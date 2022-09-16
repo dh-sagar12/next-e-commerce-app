@@ -24,7 +24,7 @@ const MobileFilterNav = () => {
 
     return (
         <>
-            <div className=" flex flex-row items-center justify-between px-3 my-2 sm:px-7 bg-purple-100 ">
+            <div className=" flex flex-row items-center text-white justify-between px-3 my-2 sm:px-7 bg-purple-100 ">
                 <div className=" max-w-max">
                     <Listbox value={selected} onChange={setSelected}>
                         <div className=" py-2">

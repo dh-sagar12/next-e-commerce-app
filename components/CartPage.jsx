@@ -119,7 +119,7 @@ const CartPage = () => {
 
                             </div>
                             <div className='mt-3'>
-                                <button className='w-full px-4 py-3 bg-purple-500 text-lg hover:bg-purple-600 font-semibold  duration-100 transition-all text-white shadow-md rounded-md'><Link href={'/checkout'}>CheckOut</Link></button>
+                                <button className='w-full px-4 py-3 bg-purple-500 text-lg hover:bg-purple-600 font-semibold  duration-100 transition-all text-white shadow-md rounded-md'>CheckOut</button>
                             </div>
                         </div>
                     </div>

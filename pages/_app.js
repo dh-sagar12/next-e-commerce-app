@@ -11,23 +11,23 @@ import { useState, useEffect } from 'react'
 
 
 function MyApp({ Component, pageProps }) {
-  
+
   const [progress, setProgress] = useState(0)
 
   let router = useRouter()
   const url = router.pathname
 
   useEffect(() => {
-    router.events.on('routeChangeComplete', ()=>{
+    router.events.on('routeChangeComplete', () => {
       setProgress(100)
     })
   }, [router.query])
-  
+
 
 
   return url.includes('admin') ? <>
     <div id='root'>
-      <LoadingBar color='#6F43C0' progress={progress} height={4} onLoaderFinished={()=> setProgress(0)} waitingTime={500} loaderSpeed={100}/>
+      <LoadingBar color='#6F43C0' progress={progress} height={4} onLoaderFinished={() => setProgress(0)} waitingTime={500} loaderSpeed={100} />
       <AppLayout Component={Component} pageProps={pageProps} />
     </div>
   </>
@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }) {
     :
     <>
       <div id='root'>
-
+        <LoadingBar color='#6F43C0' progress={progress} height={4} onLoaderFinished={() => setProgress(0)} waitingTime={500} loaderSpeed={100} />
         <MobileUpNav />
         <Component {...pageProps} />
         <MobileFooter />

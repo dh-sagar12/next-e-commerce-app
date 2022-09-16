@@ -116,6 +116,9 @@ const ProductItems = (props) => {
 
 
     }
+
+
+    
     const handleChangeOnAttribute = (e) => {
         setKeyvalueAttributePair(preval => {
             return {

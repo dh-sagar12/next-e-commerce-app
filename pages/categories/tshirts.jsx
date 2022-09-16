@@ -104,7 +104,7 @@ const Tshirts = () => {
 
   return (
     <>
-      <h1 className='text-4xl text-center my-7'>T-shirts</h1>
+      <h1 className='text-4xl text-center '>T-shirts</h1>
       <MobileFilterNav />
       <hr className='my-3 bg-purple-500' />
       <div className="mt-6  grid grid-cols-2 gap-y-8 gap-x-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:gap-x-8">
