@@ -1,4 +1,4 @@
-import { Select } from 'antd';
+import { message, Select } from 'antd';
 import QueryString from 'qs';
 import axios from 'axios';
 
@@ -19,7 +19,6 @@ const fetch = (value, SearchById, callback) => {
     currentValue = value;
 
     const fake = () => {
-        console.log('SerchById', SearchById);
         let str;
         if (SearchById == false) {
             str = QueryString.stringify({
@@ -39,13 +38,18 @@ const fetch = (value, SearchById, callback) => {
         axios.get(`${base_url}/api/product-search/?${str}`)
             .then((response) => {
                 let output = response.data;
-                console.log(output);
                 if (currentValue === value) {
-                    console.log(output);
                     callback(output);
                 }
-            })
+            }).catch(err=>{
+                if (err.message){
+                    message.error(err.message)
+                }else{
 
+                    message.error('Something Went Wrong')
+                }
+            })
+ 
 
     };
 
@@ -53,7 +57,7 @@ const fetch = (value, SearchById, callback) => {
 };
 
 const SearchInput = (props) => {
-    const { SearchById } = props
+    const { SearchById, setSelectedItem } = props
     const [data, setData] = useState([]);
     const [value, setValue] = useState();
 
@@ -67,6 +71,7 @@ const SearchInput = (props) => {
 
     const handleChange = (newValue) => {
         setValue(newValue);
+        setSelectedItem(newValue)
     };
 
     const options = data.map((d) => (
