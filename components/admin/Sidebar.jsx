@@ -3,7 +3,8 @@ import {
     HomeOutlined,
     GoldOutlined,
     AppstoreAddOutlined,
-    ShoppingCartOutlined
+    ShoppingCartOutlined,
+    CloudUploadOutlined
 } from '@ant-design/icons';
 
 import { Layout, Menu } from 'antd';
@@ -43,6 +44,12 @@ const Sidebar = (props) => {
             icon: <ShoppingCartOutlined />,
             label: 'Orders',
             href: '/admin/orders'
+        },
+        {
+            key: '5',
+            icon: <CloudUploadOutlined />,
+            label: 'Banner Uploader',
+            href: '/admin/banner'
         }
     ]
 

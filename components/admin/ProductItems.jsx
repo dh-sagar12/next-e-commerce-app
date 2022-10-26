@@ -19,6 +19,8 @@ const { Option } = Select;
 
 const ProductItems = (props) => {
 
+    const base_url = process.env.baseURL
+
     const newProduct = useSelector(state => state.newProductSlice.new_product)
     
 
@@ -41,7 +43,7 @@ const ProductItems = (props) => {
 
 
     useEffect(() => {
-      axios.get('http://127.0.0.1:8000/api/get-attribute/').then(res=> {
+      axios.get(`${base_url}/api/get-attribute/`).then(res=> {
         setFetchedAttributes(res.data)
       }).catch(e=>{
         message.error(e.message)
@@ -139,10 +141,6 @@ const ProductItems = (props) => {
     }
 
     const handleSaveProduct = () => {
-        console.log(newProduct[0]);
-        console.log(ProductItemState);
-        console.log(fileList);
-        console.log(attributeValue);
 
         const formData = new FormData();
         
@@ -159,14 +157,13 @@ const ProductItems = (props) => {
 
         setUploading(true);
 
-        fetch('http://localhost:8000/api/add-full-product/', {
+        fetch(`${base_url}/api/add-full-product/`, {
             method: 'POST',
             body: formData
         })
             .then((res) => res.json())
             .then((data) => {
                 if (data.status == 200) {
-                    console.log(data.msg);
                     message.success(`${data.msg}`)
                     setFileList([]);
                     setProductItemState({})
@@ -177,7 +174,6 @@ const ProductItems = (props) => {
 
                 }
                 else {
-                    console.log(data)
                     if (data.error !== undefined){
                         message.error(`${data.error}`)
                     }
