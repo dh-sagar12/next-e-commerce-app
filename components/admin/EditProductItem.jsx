@@ -22,11 +22,6 @@ const { Option } = Select;
 const EditProductItem = (props) => {
     const { EditPoductInventory, base_url } = props
 
-
-    const newProduct = useSelector(state => state.newProductSlice.new_product)
-
-
-    const dispatch = useDispatch()
     const [form] = Form.useForm();
 
     const [attributeValue, setAttributeValue] = useState([])

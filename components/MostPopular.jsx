@@ -1,8 +1,38 @@
 /* eslint-disable @next/next/no-img-element */
+import { message } from 'antd'
+import axios from 'axios'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useState } from 'react'
+
 
 const MostPopular = () => {
+    const base_url = process.env.baseURL
+    const [MostPopularItems, setMostPopularItems] = useState([])
+
+    useEffect(() => {
+
+        fetchPopularItems()
+
+    }, [])
+
+    const fetchPopularItems = () => {
+        axios.post(`${base_url}/api/get-popular-items/`, {}).then(res => {
+            let result = res.data
+            setMostPopularItems(result)
+        }).catch(
+            err => {
+                if (err.message) {
+                    message.error(err.message)
+                }
+                else {
+                    message.error('SOMETHING WENT WRONG!!!')
+                }
+            }
+        )
+    }
+
+
     const popular = [
         {
             id: 1,
@@ -75,22 +105,24 @@ const MostPopular = () => {
             </div>
             <div className="grid grid-cols-2 gap-1 md:gap-3 px-1 md:grid-cols-4 md:px-10">
                 {
-                    popular.map((prop) => {
+                    MostPopularItems.map((prop) => {
                         return (
                             <>
-                                <Link href={`/product/${prop.id}-${prop.slug}`} passHref>
-                                    <div className="border border-purple-200 hover:scale-105 duration-500 hover:shadow-md cursor-pointer" key={prop.id}>
-                                        <div className="rounded-md  break-inside-avoid-column flex items-center justify-between px-2 ">
-                                            <div className=' justify-start h-1/3 w-1/3'>
-                                                <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="alt" className='bg-transparent  hover:scale-105 duration-500 max-h-full max-w-full' />
-                                            </div>
-                                            <div className='ml-3'>
-                                                <h4 className="font-semibold text-sm sm:text-xl md:text-sm  sm:font-semibold">Adidas T-shirt...</h4>
-                                                <p className='text-gray-500'>$400</p>
+                                <span key={prop.product_inventory_id}>
+                                    <Link href={`/product/${prop.slug}`} passHref>
+                                        <div className="border border-purple-200 hover:scale-105 duration-500 hover:shadow-md cursor-pointer" key={prop.id}>
+                                            <div className="rounded-md  break-inside-avoid-column flex items-center justify-between px-2 ">
+                                                <div className=' justify-start h-1/3 w-1/3'>
+                                                    <img src={`${base_url}${prop.images[0]}`} alt="alt" className='bg-transparent  hover:scale-105 duration-500 max-h-full max-w-full' />
+                                                </div>
+                                                <div className='ml-3'>
+                                                    <h4 className="font-semibold text-sm sm:text-xl md:text-sm  sm:font-semibold">{prop.product_name}</h4>
+                                                    <p className='text-gray-500'>${prop.retail_price}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
+                                    </Link>
+                                </span>
                             </>
                         )
                     })

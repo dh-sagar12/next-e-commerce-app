@@ -18,7 +18,7 @@ const ViewAddedProduct = () => {
 
     useEffect(() => {
         axios.get(`${base_url}/api/get-full-product/`).then(res => {
-            setProductData(res.data)
+            setProductData(res.data.results)
         }
         ).catch(err => {
             message.error(err.message);
@@ -127,7 +127,7 @@ const ViewAddedProduct = () => {
                     <div className="content-between">
                         <Image
                             width={100}
-                            src={`${base_url}${record.image}`}
+                            src={`${record.image}`}
                             
 
                         />
@@ -199,7 +199,8 @@ const ViewAddedProduct = () => {
                 columns={firstLevelColumns}
                 rowKey={record => record.id}
                 loading={fakeFirstLevelData.length > 1 ? false : true}
-                pagination={false}
+                pagination={true}
+                page
                 expandable={{
                     expandedRowRender: firstExpandedRow,
                     defaultExpandAllRows: false

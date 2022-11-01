@@ -12,7 +12,7 @@ const MobileUpNav = () => {
     
     return (
         <>
-            <header className=" w-full fixed z-20 text-white" >
+            <header className=" w-full sticky top-0 z-20 text-white" >
                 <nav className="flex justify-between flex-col w-full bg-slate-900 text-white py-2 ">
                     <div className='flex justify-between px-2 items-center md:pb-3'>
                         <Link href={'/'} className=''>
