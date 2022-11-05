@@ -33,68 +33,7 @@ const MostPopular = () => {
     }
 
 
-    const popular = [
-        {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-            slug: 'basic-tee'
-        },
-        {
-            id: 2,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-            slug: 'basic-tee'
-        },
-        {
-            id: 3,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-            slug: 'basic-tee'
-        },
-        {
-            id: 4,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-            slug: 'basic-tee'
-        },
-        {
-            id: 5,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-            slug: 'basic-tee'
-        },
-        {
-            id: 6,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-            slug: 'basic-tee'
-        }
-    ]
+ 
     return (
         <>
             <div className="title flex justify-between items-center py-5 px-3 md:px-10 ">
@@ -107,7 +46,6 @@ const MostPopular = () => {
                 {
                     MostPopularItems.map((prop) => {
                         return (
-                            <>
                                 <span key={prop.product_inventory_id}>
                                     <Link href={`/product/${prop.slug}`} passHref>
                                         <div className="border border-purple-200 hover:scale-105 duration-500 hover:shadow-md cursor-pointer" key={prop.id}>
@@ -123,7 +61,6 @@ const MostPopular = () => {
                                         </div>
                                     </Link>
                                 </span>
-                            </>
                         )
                     })
                 }

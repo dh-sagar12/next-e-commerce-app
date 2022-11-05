@@ -3,12 +3,12 @@ import Image from 'next/image'
 import DisplayItems from '../components/DisplayItems';
 import HomeSlider from '../components/HomeSlider';
 import MostPopular from '../components/MostPopular';
+import axios from 'axios';
 
 
 
-
-export default function Home() {
- 
+export default function Home(props) {
+  const { data } = props
 
 
   return (
@@ -19,12 +19,37 @@ export default function Home() {
         <meta name="keywords" content="Footware , mens custom, men fashion, Hoodies, T-shirt, Shirts, Fashion for men " />
       </Head>
       <div className="px-1 py-2">
-        <HomeSlider/>
+        <HomeSlider />
       </div>
       <MostPopular />
       <div className="items">
-        <DisplayItems />
+        <DisplayItems ProductItems = {data}/>
       </div>
     </>
   )
+}
+
+
+
+export const getServerSideProps = async (ctx) => {
+  console.log(ctx);
+  const base_url = process.env.baseURL
+  try {
+    let response = await axios.get(`${base_url}/api/get-product/`)
+    return {
+      props: {
+        data: response.data
+      }
+    }
+  } catch (error) {
+    return {
+      props: {
+          error: error
+      },
+  };
+  }
+
+
+
+
 }
