@@ -11,7 +11,12 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/autoplay';
 import ProductCard from './ProductCard';
-const BigScreenCategories = () => {
+import ProductItemCard from './ProductItemCard';
+
+
+
+const BigScreenCategories = ({PopularCategory}) => {
+    console.log(PopularCategory);
     const cateProd = [
         {
             cid: 1,
@@ -221,13 +226,13 @@ const BigScreenCategories = () => {
             <DisplayMobileCategory />
 
             {
-                cateProd.map((cp) => {
+                PopularCategory.map((cp) => {
                     return (
                         <>
-                            <div className="title flex justify-between items-center py-5 px-3 md:px-10 " key={cp.cid}>
-                                <h2 className='text-2xl font-bold'> {cp.title}</h2>
+                            <div className="title flex justify-between items-center py-5 px-3 md:px-10 " key={cp.category_id}>
+                                <h2 className='text-2xl font-bold'> {cp.category_title}</h2>
                                 <ul className="see-more list-none">
-                                    <Link href={cp.link}><a className='text-purple-500 font-semibold underline'>See More</a></Link>
+                                    <Link href={cp.category_url}><a className='text-purple-500 font-semibold underline'>See More</a></Link>
                                 </ul>
                             </div>
 
@@ -237,11 +242,11 @@ const BigScreenCategories = () => {
                                 pagination={{
                                     clickable: true,
                                 }}>
-                                {cp.product.map((prod) => {
+                                {cp.products.map((prod) => {
                                     return (
                                         <>
-                                            <SwiperSlide key={prod.id} tag='li' >
-                                                <ProductCard product={prod} />
+                                            <SwiperSlide key={prod.product_id} tag='li' >
+                                                <ProductItemCard product={prod} />
                                             </SwiperSlide>
                                         </>
                                     )
