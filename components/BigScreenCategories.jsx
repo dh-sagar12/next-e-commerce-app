@@ -15,205 +15,7 @@ import ProductItemCard from './ProductItemCard';
 
 
 
-const BigScreenCategories = ({PopularCategory}) => {
-    console.log(PopularCategory);
-    const cateProd = [
-        {
-            cid: 1,
-            title: 'Popular on T-shirts',
-            link: '/categories/tshirts',
-            product: [
-                {
-                    id: 1,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 35],
-                    color: 'Black',
-                },
-                {
-                    id: 2,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 3,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-03.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 4,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-04.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 5,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 6,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 7,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 8,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 9,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 10,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                }
-            ]
-        },
-        {
-            cid: 2,
-            title: 'Popular on Footwears',
-            link: '/categories/footwears',
-            product: [
-                {
-                    id: 1,
-                    name: 'Nike show',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 2,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 3,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 4,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 5,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 6,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 7,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 8,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 9,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                },
-                {
-                    id: 10,
-                    name: 'Basic Tee',
-                    href: '#',
-                    images:[{ file_name: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}],
-                    imageAlt: "Front of men's Basic Tee in black.",
-                    price_option:[ 32],
-                    color: 'Black',
-                }
-            ]
-        },
-
-    ]
+const BigScreenCategories = ({ PopularCategory }) => {
 
 
     SwiperCore.use([Navigation, Pagination, Autoplay])
@@ -232,7 +34,10 @@ const BigScreenCategories = ({PopularCategory}) => {
                             <div className="title flex justify-between items-center py-5 px-3 md:px-10 " key={cp.category_id}>
                                 <h2 className='text-2xl font-bold'> {cp.category_title}</h2>
                                 <ul className="see-more list-none">
-                                    <Link href={cp.category_url}><a className='text-purple-500 font-semibold underline'>See More</a></Link>
+                                    {/* <Link href={{ pathname: cp.category_url, query: { category_id: cp.category_id } }}
+                                        as={`${cp.category_url}`}><a className='text-purple-500 font-semibold underline'>See More</a></Link> */}
+
+                                    <Link href={cp.category_url} ><a className='text-purple-500 font-semibold underline'>See More</a></Link>
                                 </ul>
                             </div>
 
@@ -245,7 +50,7 @@ const BigScreenCategories = ({PopularCategory}) => {
                                 {cp.products.map((prod) => {
                                     return (
                                         <>
-                                            <SwiperSlide key={prod.product_id} tag='li' >
+                                            <SwiperSlide tag='li' key={prod.product_inventory_id} >
                                                 <ProductItemCard product={prod} />
                                             </SwiperSlide>
                                         </>
