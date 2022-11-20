@@ -4,7 +4,8 @@ import {
     GoldOutlined,
     AppstoreAddOutlined,
     ShoppingCartOutlined,
-    CloudUploadOutlined
+    CloudUploadOutlined,
+    AppstoreOutlined
 } from '@ant-design/icons';
 
 import { Layout, Menu } from 'antd';
@@ -50,6 +51,12 @@ const Sidebar = (props) => {
             icon: <CloudUploadOutlined />,
             label: 'Banner Uploader',
             href: '/admin/banner'
+        },
+        {
+            key: '6',
+            icon: <AppstoreOutlined />,
+            label: 'Category',
+            href: '/admin/category'
         }
     ]
 

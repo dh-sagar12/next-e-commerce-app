@@ -34,8 +34,7 @@ const BigScreenCategories = ({ PopularCategory }) => {
                             <div className="title flex justify-between items-center py-5 px-3 md:px-10 " key={cp.category_id}>
                                 <h2 className='text-2xl font-bold'> {cp.category_title}</h2>
                                 <ul className="see-more list-none">
-                                    {/* <Link href={{ pathname: cp.category_url, query: { category_id: cp.category_id } }}
-                                        as={`${cp.category_url}`}><a className='text-purple-500 font-semibold underline'>See More</a></Link> */}
+                                  
 
                                     <Link href={cp.category_url} ><a className='text-purple-500 font-semibold underline'>See More</a></Link>
                                 </ul>
