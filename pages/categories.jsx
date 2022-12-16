@@ -53,7 +53,6 @@ export default Categories;
 
 
 export const getServerSideProps = async (ctx) => {
-  console.log(ctx);
   const base_url = process.env.baseURL
   try {
     let response = await axios.get(`${base_url}/api/categorywise-popular-items/`)

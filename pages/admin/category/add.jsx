@@ -16,11 +16,7 @@ const AddCategory = () => {
 
 
 
-    useEffect(() => {
-
-        console.log(CategoryItemState);
-
-    }, [CategoryItemState])
+    
 
 
 

@@ -20,65 +20,7 @@ const DisplayMobileCategory = () => {
         })
     }, [])
     
-
-    const categories = [
-        {
-            id: 1,
-            title: "T-Shirts",
-            img: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-            desc: 'Formal  & Unformal Both of All sizes',
-            link: '/categories/tshirts'
-        },
-        {
-            id: 2,
-            title: "Hoodies",
-            img: 'https://static-01.daraz.com.np/p/aa1cb3b65d946f981825db7f36fbcebb.jpg',
-            desc: 'Formal  & Unformal Both of All sizes',
-            link: '/categories/hoodies'
-
-        },
-        {
-            id: 3,
-            title: "Trousers and Pants",
-            img: 'https://static-01.daraz.com.np/p/0db552a77c12de3ecd34ee5978a31b07.jpg',
-            desc: 'Formal  & Unformal Both of All sizes',
-            link: '/categories/trousers'
-
-        },
-        {
-            id: 4,
-            title: "Footwears",
-            img: 'https://m.media-amazon.com/images/I/71sSvtnSBwL._AC_UX500_.jpg',
-            desc: 'Formal  & Unformal Both of All sizes',
-            link: '/categories/footwears'
-
-        },
-        {
-            id: 5,
-            title: "Shirts",
-            img: 'https://m.media-amazon.com/images/I/816fhPoCRyS._AC_UY500_.jpg',
-            desc: 'Formal  & Unformal Both of All sizes',
-            link: '/categories/shirts'
-
-        },
-        {
-            id: 6,
-            title: "Eyewears",
-            img: 'https://m.media-amazon.com/images/I/51e+5-rJlOL._AC_UX679_.jpg',
-            desc: 'Formal  & Unformal Both of All sizes',
-            link: '/categories/eyewears'
-
-        },
-        {
-            id: 7,
-            title: "Sports Collections",
-            img: 'https://m.media-amazon.com/images/I/711J2M6vm8L._AC_UY500_.jpg',
-            desc: 'Formal  & Unformal Both of All sizes',
-            link: '/categories/sports'
-
-        },
-
-    ]
+    
     return (
         <>
             <div className="grid grid-cols-1 gap-x-2 gap-y-3 md:gap-3 m-4  md:grid-cols-4 md:px-4 md:py-5">
