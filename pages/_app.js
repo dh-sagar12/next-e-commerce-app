@@ -14,6 +14,8 @@ import axios from 'axios'
 import handleRefreshToken from '../Functions/getAutoLogin'
 import getUserData from '../Functions/getUserData'
 import { updateCurrentUser } from '../redux/auth/userDataSlice'
+import { message } from 'antd'
+import { setCartItem } from '../redux/cart/cartSlice'
 
 function MyApp({ Component, pageProps }) {
   const currentUser = useSelector(state => state.userDataSlice.currentUser)
@@ -23,7 +25,7 @@ function MyApp({ Component, pageProps }) {
 
   let router = useRouter()
   const url = router.pathname
-
+  const siteURL = process.env.SITE_URL
 
   useEffect(() => {
 
@@ -50,17 +52,30 @@ function MyApp({ Component, pageProps }) {
       // console.log('response', data);
       if (data.status == 200) {
         getUserData().then(data => {
-            if (data?.status ==200){
-              dispatch(updateCurrentUser(data?.data))
-            }
-            else{
-              dispatch(updateCurrentUser(null))
+          if (data?.status == 200) {
+            dispatch(updateCurrentUser(data?.data))
+          }
+          else {
+            dispatch(updateCurrentUser(null))
 
+          }
+
+          axios.get(`${siteURL}/api/user/cart`).then(res => {
+            let cart = res.data
+            if (cart.status == 200) {
+              console.log(cart.results);
+              dispatch(setCartItem(cart.results))
+
+            } else {
+              console.log(cart.error);
             }
-          
+          }).catch(err => {
+            message.err('NETWORK ERROR ON FETCHING CART')
+          })
+
         })
       }
-     
+
 
 
     })
@@ -68,7 +83,7 @@ function MyApp({ Component, pageProps }) {
     // let authTokens = localStorage.getItem('GustyAuthtokens')
     // dispatch(updateAuthCredential(JSON.parse(authTokens)))
 
-  }, [router])
+  }, [])
 
 
   // dispatch(updateAuthCredential(data.token))

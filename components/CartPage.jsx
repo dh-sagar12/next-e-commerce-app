@@ -11,8 +11,10 @@ const CartPage = () => {
     const Cart = useSelector(state => state.cartSlice.cart)
     const [subTotalPrice, setsubTotalPrice] = useState(0)
     const dispatch = useDispatch();
-
+    const base_url  =  process.env.baseURL
     useEffect(() => {
+        console.log('cart', Cart);
+
         subTotalCartAmount()
     }, [Cart])
 
@@ -43,8 +45,8 @@ const CartPage = () => {
     return (
         <>
             <div className="min-h-screen md:mx-7">
-                <div className='py-9'>
-                    <h2 className='text-center font-bold text-3xl py-10'>
+                <div className=''>
+                    <h2 className='text-center font-bold text-3xl py-1'>
                         My Cart
                     </h2>
                 </div>
@@ -53,51 +55,39 @@ const CartPage = () => {
 
                 {Cart.length > 0 ?
                     <div className="flex flex-col justify-center items-center md:items-start  mx-4 md:flex-row md:justify-between md:mx-1">
-                        <div className="items-box  md:flex-grow lg:flex-auto mb-8 ">
-                            <Scrollbars autoHeight autoHeightMin={450}>
+                        <div className="items-box  md:flex-grow lg:flex-auto mb-8 md:w-1/2 ">
+                            <Scrollbars autoHeight autoHeightMin={700}>
                                 {
                                     Cart.map((cartItem) => {
                                         return (
                                             <div key={cartItem.id}>
-                                                <div className=' w-full sm:w-5/6 sm:mx-auto border rounded-lg bg-purple-50 border-purple-100 shadow-sm relative my-1 md:mx-1 md:w-11/12 lg:w-[600px] lg:mx-auto lg:px-5' >
-                                                    <div className=' text-2xl right-2 text-red-600 absolute top-2 cursor-pointer hover:text-red-500 hover:scale-125 transition-all duration-200' onClick={() => removecartItems(cartItem.id)}>
-                                                        <AiFillMinusCircle />
+                                                <div className="md:flex items-center py-8 border-t border-gray-200">
+                                                    <div className="md:w-1/3 md:h-56">
+                                                        <img src={`${base_url}${cartItem.images[0]}`} alt className="w-full h-full object-center object-cover" />
                                                     </div>
-                                                    <div className="flex items-center justify-between mx-2 py-3 sm:mx-5 md:mx-1">
-                                                        {/* image shown here */}
-                                                        <div className="w-1/3 sm:w-1/5 md:w-1/12 h-auto rounded-md border " >
-                                                            <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg " alt="flase" className='h-1/6' />
-                                                        </div>
-
-                                                        {/* description shown here */}
-                                                        <div className="item-description ">
-                                                            <div className="flex ">
-                                                                <h4 className='text-lg font-bold'>{cartItem.name}</h4>
-                                                            </div>
-                                                            <div className='flex text-lg space-x-2 text-slate-400 '>
-                                                                <div className='flex'>
-                                                                    <p className='text-base'>Color: </p>
-                                                                    <div className={`rounded-full w-3 h-3 my-auto mx-2 ${cartItem.color} `}></div>
-                                                                </div>
-                                                                <div className='flex'>
-                                                                    <p className='text-base'>Size: </p>
-                                                                    <div className={`rounded-full text-md my-auto mx-2 `}>{cartItem.size}</div>
-                                                                </div>
-
-                                                            </div>
-                                                            <p className='text-base text-slate-400'>$ 1000</p>
-                                                            <div className='text-base flex space-x-2 mt-1'>
-                                                                <button className={cartItem.cartvalue > 1 ? 'cursor-pointer' : 'cursor-not-allowed'} onClick={() => decreaseCartValue(cartItem.id, cartItem.cartvalue)}><AiOutlineMinus /></button>
-                                                                <input type="text" className='w-12 pl-5 border border-purple-400' value={cartItem.cartvalue} readOnly />
+                                                    <div className="md:pl-3 md:pr-4 md:w-3/4 w-full">
+                                                        <p className="text-xs p-0 m-0 text-gray-800 md:pt-0 pt-4">{cartItem.sku}</p>
+                                                        <div className="flex items-center justify-between w-full ">
+                                                            <p className="text-base font-black leading-none text-gray-800">{cartItem.product_name}</p>
+                                                            <div className='text-base flex space-x-2 mt-1 py-2 px-1'>
+                                                                <button className={cartItem.cart_qty > 1 ? 'cursor-pointer' : 'cursor-not-allowed'} onClick={() => decreaseCartValue(cartItem.id, cartItem.cart_qty)}><AiOutlineMinus /></button>
+                                                                <input type="text" className='w-12 pl-5 border border-purple-400' value={cartItem.cart_qty} readOnly />
                                                                 <button onClick={() => increaseCartValue(cartItem.id)}><AiOutlinePlus /></button>
                                                             </div>
                                                         </div>
-                                                        <div className="totalPrice font-semibold text-lg hidden sm:flex">
-                                                            <span>Total: ${cartItem.price * cartItem.cartvalue}</span>
+                                                        <p className="text-xs leading-3 text-gray-600 pt-2">Height: 10 inches</p>
+                                                        <p className="text-xs leading-3 text-gray-600 py-4">Color: Black</p>
+                                                        <p className="w-96 text-xs leading-3 text-gray-600">Composition: 100% calf leather</p>
+                                                        <div className="flex items-center justify-between pt-5 pr-6">
+                                                            <div className="flex itemms-center">
+                                                                <p className="text-xs leading-3 underline text-gray-800 cursor-pointer">Add to favorites</p>
+                                                                <p className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
+                                                            </div>
+                                                            <p className="text-base font-black leading-none text-gray-800">$9,000</p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <hr className='  w-full my-3 bg-slate-500 md:w-5/6 lg:w-[600px] lg:mx-auto' />
+
 
                                             </div>
                                         )

@@ -4,7 +4,15 @@ import React from 'react'
 import AddToCartBtn from './AddToCartBtn';
 import { message, Spin, Skeleton } from 'antd';
 
+import { useSelector } from 'react-redux';
+import { BsFillCartCheckFill } from 'react-icons/bs'
+
+
 const ProductCard = ({ product }) => {
+  const cartitem = useSelector(state => state.cartSlice.cart)
+
+  const   CheckProductIncart  = cartitem.find(item => item.product_id === product.id)
+  console.log('CheckProductIncart :', CheckProductIncart);
   return (
 
     <>
@@ -37,11 +45,11 @@ const ProductCard = ({ product }) => {
                 <p>Price Options: $</p>
                 <div className='space-x-1'>
                   {product.price_option !== undefined ?
-                    
-                      product.price_option.map((price, ind) => {
-                        return <a className='hover:underline'><span className={ind}>{price},</span></a>
-                      })
-                    
+
+                    product.price_option.map((price, ind) => {
+                      return <a className='hover:underline' key={ind}><span className={ind}>{price},</span></a>
+                    })
+
                     : <></>
                   }
 
@@ -50,15 +58,18 @@ const ProductCard = ({ product }) => {
               <div className='flex space-x-3 text-xs font-semibold text-gray-400'>
                 <p>Available Options:</p>
 
-                { product.price_option !==undefined?
-                  <a className='hover:underline'>{product.price_option.length}</a>: <></>
+                {product.price_option !== undefined ?
+                  <a className='hover:underline'>{product.price_option.length}</a> : <></>
                 }
               </div>
             </div>
           </Link>
         </div>
         <div>
-          <AddToCartBtn product={product} />
+          {
+            <AddToCartBtn product={product} />
+
+          }
         </div>
 
       </div >
