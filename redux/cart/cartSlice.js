@@ -20,7 +20,9 @@ const cartSlice = createSlice({
             if (tempItem === undefined) {
                 axios.post('/api/user/cart/', action.payload).then(res=>{
                     if(res.data.status==200){
-                        state.cart = res.data.added_data
+                        console.log('axios post cart data', res.data.added_data);
+                        state.cart =res.data.added_data
+                        // setCartItem(res.data.added_data)
                     }
                     else{
                         message.error('something went wrong on adding cart')

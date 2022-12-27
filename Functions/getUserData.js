@@ -1,11 +1,12 @@
 import axios from "axios";
 
 
+const siteURL   =  process.env.SITE_URL
 
 const getUserData = async () => {
     try {
 
-        const  response =  await axios.get(`/api/auth/user/`);
+        let   response =  await axios.get(`/api/auth/user/`);
         return response.data
     }
     catch (error) {
@@ -13,8 +14,18 @@ const getUserData = async () => {
     }
 }
 
+
+
+
+const getUserCart  =  async  () =>{
+    try {
+        let response    = await axios.get(`${siteURL}/api/user/cart`)
+        return response.data
+    } catch (error) {
+        return error
+    }
+}
+
 export default getUserData
-
-
-
+export  {getUserCart}
 

@@ -7,6 +7,7 @@ import { Dropdown, Menu, message, Space } from 'antd'
 import { DownOutlined, UserOutlined, LogoutOutlined, DashboardOutlined } from '@ant-design/icons'
 import { updateAuthCredential } from '../redux/auth/authSlice'
 import { updateCurrentUser } from '../redux/auth/userDataSlice'
+import { setCartItem } from '../redux/cart/cartSlice'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 
@@ -30,6 +31,7 @@ const MobileUpNav = () => {
             message.success(result.msg)
             dispatch(updateAuthCredential(null))
             dispatch(updateCurrentUser(null))
+            dispatch(setCartItem([]))
             router.push('/login')
             localStorage.removeItem('GustyAuthtokens')
         }).catch(err => {
@@ -122,7 +124,7 @@ const MobileUpNav = () => {
                                     <a className='text-3xl mx-3 pt-1 hidden md:block relative text-white'>
                                         <BsCartPlus />
                                         <span className=" p-[3px] leading-none opacity-95  border-white item-number absolute top-0 -right-2 text-[13px] bg-red-700 rounded-full">
-                                            <span className='m-1'>{cartitem.length}</span>
+                                            <span className='m-1'>{cartitem?.length ?? 0}</span>
                                         </span>
                                     </a>
                                 </Link>

@@ -2,7 +2,6 @@ import axios from "axios"
 
 const handleRefreshToken = async () => {
     const siteURL   =  process.env.SITE_URL
-    console.log(siteURL);
     try {
    const response  =  await  axios.get(`${siteURL}/api/auth/refresh/`)
     return response.data

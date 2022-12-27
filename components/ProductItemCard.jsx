@@ -1,10 +1,16 @@
 import React from 'react'
 import Link from 'next/link'
 import AddToCartBtn from './AddToCartBtn'
+import { useSelector } from 'react-redux'
+import { BsFillCartCheckFill } from 'react-icons/bs'
 
 
 const ProductItemCard = ({ product }) => {
     const base_url = process.env.baseURL
+    const cartitem = useSelector(state => state.cartSlice.cart)
+
+    const alreadyAddedProducts = cartitem.find(item => item.product_inventory_id === product.product_inventory_id)
+
 
 
     return (
@@ -52,7 +58,20 @@ const ProductItemCard = ({ product }) => {
                     </Link>
                 </div>
                 <div>
-                    <AddToCartBtn product={product} />
+                    {
+                        alreadyAddedProducts == undefined ?
+                            <>
+                                <AddToCartBtn product={product} />
+
+                            </>
+                            :
+                            <div className='flex justify-center my-2 border mx-1 p-1 bg-slate-50 rounded-md border-slate-500 hover:bg-purple-100'>
+                                <button className='flex justify-center space-x-2'>
+                                    <BsFillCartCheckFill className='text-xl self-center cursor-pointer hover:text-purple-500' />
+                                    <span className='font-semibold text-gray-700'>Already Added</span>
+                                </button>
+                            </div>
+                    }
                 </div>
 
             </div >

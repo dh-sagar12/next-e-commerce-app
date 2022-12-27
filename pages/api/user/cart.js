@@ -50,10 +50,10 @@ export default async (req, res) => {
             });
         }
 
-        const { user_id, product_id, product_inventory_id, cart_qty } = req.body
+        const { product_id, product_inventory_id, cart_qty } = req.body
 
         let body = JSON.stringify(
-            { user_id, product_id, product_inventory_id, cart_qty }
+            { product_id, product_inventory_id, cart_qty }
         )
 
         try {
@@ -90,8 +90,106 @@ export default async (req, res) => {
         }
 
     }
+
+    else if (req.method == 'PUT') {
+        if (access === false) {
+            return res.status(401).json({
+                error: "User unauthorized to make this request",
+            });
+        }
+
+        const { id, cart_qty } = req.body
+
+        let body = JSON.stringify(
+            { id, cart_qty }
+        )
+
+        try {
+            const apiRes = await fetch(`${API_URL}/api/stock/user-cart/`, {
+                method: "PUT",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${access}`
+                },
+                body: body,
+
+            });
+
+            const data = await apiRes.json();
+
+            if (apiRes.status === 200) {
+
+                return res.status(200).json(data);
+            }
+            else if (apiRes.status == 500) {
+                return res.status(500).json(data);
+            }
+            else {
+                return res.status(apiRes.status).json({
+                    error: "Un-authorize access denied ",
+                    data: data
+                });
+            }
+        } catch (err) {
+            return res.status(500).json({
+                error: "Something went wrong when trying to fulfill  request",
+            });
+        }
+    }
+
+    else if (req.method == 'DELETE') {
+        if (access === false) {
+            return res.status(401).json({
+                error: "User unauthorized to make this request",
+            });
+        }
+
+        const { id } = req.body
+        console.log(req.body, 'as id ');
+
+        let body = JSON.stringify(
+            { id }
+        )
+
+        try {
+            const apiRes = await fetch(`${API_URL}/api/stock/user-cart/`, {
+                method: "DELETE",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${access}`
+                },
+                body: body,
+
+            });
+
+            const data = await apiRes.json();
+
+            if (apiRes.status === 200) {
+                return res.status(200).json(data);
+            }
+            else if (apiRes.status == 500) {
+                return res.status(500).json(data);
+            }
+            else if (apiRes.status == 400) {
+                return res.status(400).json(data);
+            }
+            else {
+                return res.status(apiRes.status).json({
+                    error: "Un-authorize access denied ",
+                    data: data
+                });
+            }
+        } catch (err) {
+            return res.status(500).json({
+                error: "Something went wrong when trying to fulfill  request",
+            });
+        }
+
+    }
     else {
-        res.setHeader("Allow", ["GET", "POST"]);
+        res.setHeader("Allow", ["GET", "POST", 'PUT', 'DELETE']);
         return res.status(405).json({ error: `Method ${req.method} not allowed` });
     }
 };

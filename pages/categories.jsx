@@ -20,7 +20,6 @@ const Categories = (props) => {
   }
 
   let toogleWidth = () => {
-    console.log('toogle width running');
     setDeviceWidth(window.innerWidth)
   }
 

@@ -4,6 +4,8 @@ import { AiOutlinePlus, AiOutlineMinus, AiFillMinusCircle } from 'react-icons/ai
 import { useSelector, useDispatch } from 'react-redux'
 import { increasecartItemvalue, decreasecartItemvalue, removeItem } from '../redux/cart/cartSlice';
 import Scrollbars from 'react-custom-scrollbars-2';
+import axios from 'axios';
+import { message } from 'antd';
 
 
 
@@ -11,33 +13,69 @@ const CartPage = () => {
     const Cart = useSelector(state => state.cartSlice.cart)
     const [subTotalPrice, setsubTotalPrice] = useState(0)
     const dispatch = useDispatch();
-    const base_url  =  process.env.baseURL
+    const base_url = process.env.baseURL
     useEffect(() => {
-        console.log('cart', Cart);
-
         subTotalCartAmount()
     }, [Cart])
 
 
 
-    const increaseCartValue = (id) => {
+    const increaseCartValue = (id, prevCount) => {
+        let cartData = {
+            id: id,
+            cart_qty: prevCount + 1
+        }
+
+        axios.put('/api/user/cart/', cartData).then(res => {
+            let response = res.data
+            return response
+        }).catch(err => {
+            if (err?.response?.data?.status == 400) {
+                message.error(err?.response?.data?.msg)
+            }
+        })
         dispatch(increasecartItemvalue(id))
+
     }
 
     const decreaseCartValue = (id, cartvalue) => {
         if (cartvalue > 1) {
+            let cartData = {
+                id: id,
+                cart_qty: cartvalue - 1
+            }
+
+            axios.put('/api/user/cart/', cartData).then(res => {
+                let response = res.data
+                return response
+            }).catch(err => {
+                if (err?.response?.data?.status == 400) {
+                    message.error(err?.response?.data?.msg)
+                }
+            })
             dispatch(decreasecartItemvalue(id))
         }
     }
 
-    const removecartItems = (id) => {
-        dispatch(removeItem(id))
+    const removecartItems = (cartId) => {
+        axios.delete('/api/user/cart/', {data: {id: cartId}}).then(res => {
+            let response = res.data
+            if(response.status==200){
+                dispatch(removeItem(cartId))
+            }
+            return response
+
+        }).catch(err => {
+            if (err?.response?.data?.status == 400) {
+                message.error(err?.response?.data?.msg)
+            }
+        })
     }
 
     const subTotalCartAmount = () => {
         let SubTotalPrice = 0
         Cart.forEach(item => {
-            SubTotalPrice = SubTotalPrice + (item.price * item.cartvalue)
+            SubTotalPrice = SubTotalPrice + (item.store_price * item.cart_qty)
         });
         setsubTotalPrice(SubTotalPrice)
 
@@ -72,7 +110,7 @@ const CartPage = () => {
                                                             <div className='text-base flex space-x-2 mt-1 py-2 px-1'>
                                                                 <button className={cartItem.cart_qty > 1 ? 'cursor-pointer' : 'cursor-not-allowed'} onClick={() => decreaseCartValue(cartItem.id, cartItem.cart_qty)}><AiOutlineMinus /></button>
                                                                 <input type="text" className='w-12 pl-5 border border-purple-400' value={cartItem.cart_qty} readOnly />
-                                                                <button onClick={() => increaseCartValue(cartItem.id)}><AiOutlinePlus /></button>
+                                                                <button onClick={() => increaseCartValue(cartItem.id, cartItem.cart_qty)}><AiOutlinePlus /></button>
                                                             </div>
                                                         </div>
                                                         <p className="text-xs leading-3 text-gray-600 pt-2">Height: 10 inches</p>
@@ -80,8 +118,7 @@ const CartPage = () => {
                                                         <p className="w-96 text-xs leading-3 text-gray-600">Composition: 100% calf leather</p>
                                                         <div className="flex items-center justify-between pt-5 pr-6">
                                                             <div className="flex itemms-center">
-                                                                <p className="text-xs leading-3 underline text-gray-800 cursor-pointer">Add to favorites</p>
-                                                                <p className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
+                                                                <button className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer" onClick={()=> removecartItems(cartItem.id)}>Remove</button>
                                                             </div>
                                                             <p className="text-base font-black leading-none text-gray-800">$9,000</p>
                                                         </div>

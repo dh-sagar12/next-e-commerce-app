@@ -6,9 +6,10 @@ const nextConfig = {
     SITE_URL: 'http://localhost:3000'
   },
   images: {
-    domains: ['http:/127.0.0.1:8000/'],
+    domains: ['127.0.0.1'],
+  },
 
 }
-}
+
 
 module.exports = nextConfig

@@ -7,9 +7,9 @@ import { useDispatch } from 'react-redux'
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { updateAuthCredential } from '../redux/auth/authSlice';
-import getUserData from '../Functions/getUserData';
+import getUserData, {getUserCart} from '../Functions/getUserData';
 import { updateCurrentUser } from '../redux/auth/userDataSlice';
-import { getCookieParser } from 'next/dist/server/api-utils';
+import { setCartItem } from '../redux/cart/cartSlice';
 
 
 
@@ -57,11 +57,13 @@ const Login = () => {
 
   const ProceedAuthentication = async (data) => {
     let user = await getUserData()
-    // console.log('user', user);
     if (user?.data) {
-      localStorage.setItem('GustyAuthtokens', JSON.stringify(data.token))
+      let cartItems  =  await getUserCart()
+      console.log('cartItems', cartItems);
+      // localStorage.setItem('GustyAuthtokens', JSON.stringify(data.token))
       dispatch(updateAuthCredential(data.token))
       dispatch(updateCurrentUser(user?.data))
+      dispatch(setCartItem(cartItems.results))
       router?.query?.next ?
         router.push(router?.query?.next) :
         router.push('/')
@@ -70,7 +72,6 @@ const Login = () => {
     else {
       message.error('SOMETHING WENT WRONG!!')
     }
-
 
   }
 

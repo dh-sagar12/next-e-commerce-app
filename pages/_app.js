@@ -49,7 +49,6 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
 
     handleRefreshToken().then((data) => {
-      // console.log('response', data);
       if (data.status == 200) {
         getUserData().then(data => {
           if (data?.status == 200) {
@@ -70,7 +69,7 @@ function MyApp({ Component, pageProps }) {
               console.log(cart.error);
             }
           }).catch(err => {
-            message.err('NETWORK ERROR ON FETCHING CART')
+            message.error('NETWORK ERROR ON FETCHING CART')
           })
 
         })
@@ -79,11 +78,12 @@ function MyApp({ Component, pageProps }) {
 
 
     })
-
-    // let authTokens = localStorage.getItem('GustyAuthtokens')
-    // dispatch(updateAuthCredential(JSON.parse(authTokens)))
-
   }, [])
+
+
+
+
+
 
 
   // dispatch(updateAuthCredential(data.token))

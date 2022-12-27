@@ -1,25 +1,25 @@
-/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import React from 'react'
-import AddToCartBtn from './AddToCartBtn';
-import { message, Spin, Skeleton } from 'antd';
-
+import { Skeleton } from 'antd';
 import { useSelector } from 'react-redux';
-import { BsFillCartCheckFill } from 'react-icons/bs'
+import { BsFillCartCheckFill,  BsEyeFill } from 'react-icons/bs'
+
 
 
 const ProductCard = ({ product }) => {
   const cartitem = useSelector(state => state.cartSlice.cart)
+  const alreadyAddedProducts = cartitem.find(item => item.product_id === product.id)
 
-  const   CheckProductIncart  = cartitem.find(item => item.product_id === product.id)
-  console.log('CheckProductIncart :', CheckProductIncart);
+
+
   return (
 
     <>
 
 
-      <div className="group relative p-1 border border-purple-200  rounded-md transition duration-500 hover:scale-105 hover:shadow-md cursor-pointer " key={product.id}>
-        <Link href={`/product/$${product.slug}`} passHref>
+
+      <div className="group  p-1 border border-purple-200  rounded-md transition duration-500 hover:scale-105 hover:shadow-md cursor-pointer " key={product.id}>
+        <Link href={`/product/${product.slug}`} passHref>
           <div className="w-full min-h-80  rounded overflow-hidden  aspect-auto">
             {
               product.images[0] !== undefined ?
@@ -67,8 +67,24 @@ const ProductCard = ({ product }) => {
         </div>
         <div>
           {
-            <AddToCartBtn product={product} />
-
+            alreadyAddedProducts == undefined ?
+              <>
+                <Link href={`/product/$${product.slug}`} passHref>
+                  <div className='flex justify-center my-2 border mx-1 p-1 bg-slate-50 rounded-md border-slate-500 hover:bg-purple-100'>
+                    <button className='flex justify-center space-x-2'>
+                      <BsEyeFill className='text-xl self-center cursor-pointer hover:text-purple-500' />
+                      <span className='font-semibold text-gray-700'>View Product</span>
+                    </button>
+                  </div>
+                </Link>
+              </>
+              :
+              <div className='flex justify-center my-2 border mx-1 p-1 bg-slate-50 rounded-md border-slate-500 hover:bg-purple-100'>
+                <button className='flex justify-center space-x-2'>
+                  <BsFillCartCheckFill className='text-xl self-center cursor-pointer hover:text-purple-500' />
+                  <span className='font-semibold text-gray-700'>Already Added</span>
+                </button>
+              </div>
           }
         </div>
 
