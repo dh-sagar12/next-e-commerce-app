@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
           </div>
         </Link>
         <div className="mt-4 flex justify-between pb-2 px-2 items-center">
-          <Link href={`/product/$${product.slug}`} passHref>
+          <Link href={`/product/${product.slug}`} passHref>
             <div>
               <h3 className="text-sm text-gray-900 font-semibold">
                 <a href={`/product/$${product.slug}`} className='text-black'>
@@ -69,7 +69,7 @@ const ProductCard = ({ product }) => {
           {
             alreadyAddedProducts == undefined ?
               <>
-                <Link href={`/product/$${product.slug}`} passHref>
+                <Link href={`/product/${product.slug}`} passHref>
                   <div className='flex justify-center my-2 border mx-1 p-1 bg-slate-50 rounded-md border-slate-500 hover:bg-purple-100'>
                     <button className='flex justify-center space-x-2'>
                       <BsEyeFill className='text-xl self-center cursor-pointer hover:text-purple-500' />

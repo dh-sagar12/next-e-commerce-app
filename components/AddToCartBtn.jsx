@@ -12,7 +12,6 @@ const AddToCartBtn = (props) => {
 
 
     const handleAddItem = (product) => {
-
         let cart_state = {
             product_id: product.product_id,
             product_inventory_id: product.product_inventory_id,

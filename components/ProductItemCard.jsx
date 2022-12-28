@@ -16,10 +16,8 @@ const ProductItemCard = ({ product }) => {
     return (
 
         <>
-
-
             <div className="group relative p-1 border border-purple-200  rounded-md transition duration-500 hover:scale-105 hover:shadow-md cursor-pointer " key={product.id}>
-                <Link href={`/product/$${product.slug}`} passHref>
+                <Link href={`/product/${product.slug}`} passHref>
                     <div className="w-full min-h-80  rounded overflow-hidden  aspect-auto">
                         {
                             product.images[0] !== undefined ?
@@ -60,10 +58,10 @@ const ProductItemCard = ({ product }) => {
                 <div>
                     {
                         alreadyAddedProducts == undefined ?
-                            <>
+                            <div>
                                 <AddToCartBtn product={product} />
 
-                            </>
+                            </div>
                             :
                             <div className='flex justify-center my-2 border mx-1 p-1 bg-slate-50 rounded-md border-slate-500 hover:bg-purple-100'>
                                 <button className='flex justify-center space-x-2'>

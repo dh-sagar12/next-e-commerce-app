@@ -1,7 +1,6 @@
-import { Col, Row, Space, Select, Tooltip, Image, Form, InputNumber, Button, message } from 'antd'
+import { Select, Tooltip, Image, Form, InputNumber, Button, message } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 import axios from 'axios'
-import { responseSymbol } from 'next/dist/server/web/spec-compliant/fetch-event'
 import React from 'react'
 import { useEffect, useState } from 'react'
 
@@ -51,7 +50,6 @@ const AddStockPage = (props) => {
             }
         ).catch(
             (err)=>{
-            console.log(err);
             if (err.message){
                 message.error(err.message)
             }
@@ -66,9 +64,7 @@ const AddStockPage = (props) => {
 
 
 
-    const onFinishFailed = () => {
-        console.log('on finish failed');
-    }
+
 
 
     const handleSelectChange = (e) => {

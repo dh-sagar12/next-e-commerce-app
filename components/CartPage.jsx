@@ -58,13 +58,12 @@ const CartPage = () => {
     }
 
     const removecartItems = (cartId) => {
-        axios.delete('/api/user/cart/', {data: {id: cartId}}).then(res => {
+        axios.delete('/api/user/cart/', { data: { id: cartId } }).then(res => {
             let response = res.data
-            if(response.status==200){
+            if (response.status == 200) {
                 dispatch(removeItem(cartId))
             }
             return response
-
         }).catch(err => {
             if (err?.response?.data?.status == 400) {
                 message.error(err?.response?.data?.msg)
@@ -113,12 +112,15 @@ const CartPage = () => {
                                                                 <button onClick={() => increaseCartValue(cartItem.id, cartItem.cart_qty)}><AiOutlinePlus /></button>
                                                             </div>
                                                         </div>
-                                                        <p className="text-xs leading-3 text-gray-600 pt-2">Height: 10 inches</p>
-                                                        <p className="text-xs leading-3 text-gray-600 py-4">Color: Black</p>
-                                                        <p className="w-96 text-xs leading-3 text-gray-600">Composition: 100% calf leather</p>
+                                                        {
+                                                            Object.keys(cartItem.product_attributes).map((keyname, i) => (
+                                                                <p className="text-xs leading-3 text-gray-600 pt-2">{keyname}: {cartItem.product_attributes[keyname]} </p>
+                                                            ))
+
+                                                        }
                                                         <div className="flex items-center justify-between pt-5 pr-6">
                                                             <div className="flex itemms-center">
-                                                                <button className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer" onClick={()=> removecartItems(cartItem.id)}>Remove</button>
+                                                                <button className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer" onClick={() => removecartItems(cartItem.id)}>Remove</button>
                                                             </div>
                                                             <p className="text-base font-black leading-none text-gray-800">$9,000</p>
                                                         </div>

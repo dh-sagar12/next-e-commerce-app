@@ -21,14 +21,6 @@ const Inventory = () => {
   const base_url = process.env.baseURL
 
 
-  useEffect(() => {
-   console.log(StockInventoryData);
-  }, [StockInventoryData])
-  
-
-
-
-
 
   const onChangeSwitch = (checked) => {
     setChecked(checked)
@@ -46,7 +38,7 @@ const Inventory = () => {
   const handleOnChangeSearch = () => {
     setSearchLoading(!SearchLoading)
     let product_id = parseInt(SelectedItem)
-    setStockInventoryData({product_id: product_id})
+    setStockInventoryData({ product_id: product_id })
     setFetchedProduct()
     searchProduct(product_id)
   }
@@ -82,7 +74,7 @@ const Inventory = () => {
           </Row>
           <hr className='my-3' />
 
-          {FetchedProduct !== undefined ? <AddStockPage FetchedProduct={FetchedProduct} setFetchedProductItems={setFetchedProductItems} FetchedProductItems={FetchedProductItems} base_url={base_url} setStockInventoryData={setStockInventoryData}  StockInventoryData={StockInventoryData} setFetchedProduct={setFetchedProduct}/> : <></>}
+          {FetchedProduct !== undefined ? <AddStockPage FetchedProduct={FetchedProduct} setFetchedProductItems={setFetchedProductItems} FetchedProductItems={FetchedProductItems} base_url={base_url} setStockInventoryData={setStockInventoryData} StockInventoryData={StockInventoryData} setFetchedProduct={setFetchedProduct} /> : <></>}
         </div>
       </div>
     </>
