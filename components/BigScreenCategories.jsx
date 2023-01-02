@@ -31,7 +31,7 @@ const BigScreenCategories = ({ PopularCategory }) => {
                 PopularCategory.map((cp) => {
                     return (
                         <>
-                            <div className="title flex justify-between items-center py-5 px-3 md:px-10 " key={cp.category_id}>
+                            <div className="title flex justify-between items-center py-5 px-3 md:px-10 " key={cp.category_id + 100000}>
                                 <h2 className='text-2xl font-bold'> {cp.category_title}</h2>
                                 <ul className="see-more list-none">
                                   
@@ -46,13 +46,13 @@ const BigScreenCategories = ({ PopularCategory }) => {
                                 pagination={{
                                     clickable: true,
                                 }}>
-                                {cp.products.map((prod) => {
+                                {cp.products.map((prod, ind) => {
                                     return (
-                                        <>
-                                            <SwiperSlide tag='li' key={prod.product_inventory_id} >
+                                        <span key={prod.product_inventory_id + 1000 }>
+                                            <SwiperSlide tag='li'  >
                                                 <ProductItemCard product={prod} />
                                             </SwiperSlide>
-                                        </>
+                                        </span>
                                     )
                                 })}
                             </Swiper>

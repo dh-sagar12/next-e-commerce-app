@@ -21,7 +21,6 @@ const AddToCartBtn = (props) => {
         if (tempItem === undefined) {
             axios.post('/api/user/cart/', cart_state).then(res => {
                 if (res.data.status == 200) {
-                    console.log('axios post cart data', res.data.added_data);
                     dispatch(setCartItem(res.data.added_data))
                 }
                 else {
@@ -35,7 +34,7 @@ const AddToCartBtn = (props) => {
 
     return (
         <>
-            <div className='flex justify-center my-2 border mx-1 p-1 bg-slate-50 rounded-md border-slate-500 hover:bg-purple-100' onClick={() => handleAddItem({ ...props.product, cartvalue: 1 })}>
+            <div className='flex justify-center my-2 border mx-1 p-1 cursor-pointer bg-slate-50 rounded-md border-slate-500 hover:bg-purple-100' onClick={() => handleAddItem({ ...props.product, cartvalue: 1 })}>
                 <button >
                     <BsCartPlus className='text-xl self-center cursor-pointer hover:text-purple-500' />
                 </button>

@@ -17,7 +17,7 @@ const ProductItemCard = ({ product }) => {
 
         <>
             <div className="group relative p-1 border border-purple-200  rounded-md transition duration-500 hover:scale-105 hover:shadow-md cursor-pointer " key={product.id}>
-                <Link href={`/product/${product.slug}`} passHref>
+                <Link href={`/product/${product.slug}?item_id=${product.product_inventory_id}`} passHref>
                     <div className="w-full min-h-80  rounded overflow-hidden  aspect-auto">
                         {
                             product.images[0] !== undefined ?

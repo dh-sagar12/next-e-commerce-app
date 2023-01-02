@@ -6,10 +6,12 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { updateAuthCredential } from '../redux/auth/authSlice';
-import getUserData, {getUserCart} from '../Functions/getUserData';
-import { updateCurrentUser } from '../redux/auth/userDataSlice';
-import { setCartItem } from '../redux/cart/cartSlice';
+import { updateAuthCredential } from '../../redux/auth/authSlice';
+import getUserData, { getUserCart } from '../../Functions/getUserData';
+import { updateCurrentUser } from '../../redux/auth/userDataSlice';
+import { setCartItem } from '../../redux/cart/cartSlice';
+import Head from 'next/head';
+import Link from 'next/link';
 
 
 
@@ -18,6 +20,7 @@ const Login = () => {
   const [uploading, setUploading] = useState(false);
   const router = useRouter()
   const base_url = process.env.baseURL
+  const site_url  =process.env.SITE_URL
   const dispatch = useDispatch();
 
 
@@ -34,7 +37,7 @@ const Login = () => {
 
   const handleLogin = () => {
     setUploading(true)
-    axios.post(`api/auth/login/`, LoginCredentials).then(res => {
+    axios.post(`${site_url}/api/auth/login/`, LoginCredentials).then(res => {
       let result = res.data
       console.log(result);
       result.errors ? message.error(result.errors) : ProceedAuthentication(res.data)
@@ -58,7 +61,7 @@ const Login = () => {
   const ProceedAuthentication = async (data) => {
     let user = await getUserData()
     if (user?.data) {
-      let cartItems  =  await getUserCart()
+      let cartItems = await getUserCart()
       console.log('cartItems', cartItems);
       // localStorage.setItem('GustyAuthtokens', JSON.stringify(data.token))
       dispatch(updateAuthCredential(data.token))
@@ -66,8 +69,8 @@ const Login = () => {
       dispatch(setCartItem(cartItems.results))
       router?.query?.next ?
         router.push(router?.query?.next) :
-        router.push('/')
-        message.success('Logged In Successfully')
+        router.push(`/`)
+      message.success('Logged In Successfully')
     }
     else {
       message.error('SOMETHING WENT WRONG!!')
@@ -99,6 +102,9 @@ const Login = () => {
 
   return (
     <>
+      <Head>
+        <title>Login- Gusty Fashion at Doorstep</title>
+      </Head>
       <div className='text-center font-bold text-3xl py-12  text-purple-400'>Login</div>
       <section className="h-screen">
         <div className="px-6 h-full text-gray-800">
@@ -207,11 +213,13 @@ const Login = () => {
 
                   <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                     Don't have an account?
-                    <a
-                      href="#!"
-                      className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
-                    >Register</a
-                    >
+
+                    <Link href={'/user/signup'}>
+                      <a className="text-red-600 hover:text-red-700 focus:text-red-700 transition 
+                      duration-200 ease-in-out">
+                        Register
+                      </a>
+                    </Link>
                   </p>
                 </div>
 

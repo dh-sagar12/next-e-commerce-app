@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { BsInstagram, BsFillCartCheckFill, BsTwitter, BsFacebook, BsCartPlus } from 'react-icons/bs'
 
-import { Select, Tooltip, Image, Form, InputNumber, Button, message } from 'antd'
+import { Select, Tooltip, message } from 'antd'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import AddToCartBtn from './AddToCartBtn'
@@ -11,20 +11,18 @@ import AddToCartBtn from './AddToCartBtn'
 
 const ViewProduct = (props) => {
 
-    const { FetchedProduct } = props
+    const { FetchedProduct, ItemId } = props
+
     const cartitem = useSelector(state => state.cartSlice.cart)
 
 
-    const alreadyAddedProducts = cartitem.find(item => item.product_inventory_id === ProductItemDetails?.id)
 
     const base_url = process.env.baseURL
-    const [FetchedProductItems, setFetchedProductItems] = useState([])
-    const [SelectedProductItem, setSelectedProductItem] = useState(0)
-    const [ProductItemAttributes, setProductItemAttributes] = useState()
-    const [ProductItemDetails, setProductItemDetails] = useState()
-    const [visible, setVisible] = useState(false);
+    const [FetchedProductItems, setFetchedProductItems] = useState([]) //all product item fetched 
+    const [SelectedProductItem, setSelectedProductItem] = useState(0) //selected product item id 
+    const [ProductItemAttributes, setProductItemAttributes] = useState() //
+    const [ProductItemDetails, setProductItemDetails] = useState() //detail of selected product items
     const [ProductItemStockQty, setProductItemStockQty] = useState()
-    const [uploading, setUploading] = useState(false);
     const [StockInventoryData, setStockInventoryData] = useState()
     const [AlreadyAddedProductInCart, setAlreadyAddedProductInCart] = useState()
     const [CurrentPhotoToDisplay, setCurrentPhotoToDisplay] = useState()
@@ -46,9 +44,31 @@ const ViewProduct = (props) => {
     }, [cartitem, ProductItemDetails])
 
 
+    useEffect(() => {
+
+        if (ItemId == undefined) {
+            let defaultItem = FetchedProductItems.find(item => item.is_default == true)
+
+            if (defaultItem !== undefined) {
+                setSelectedProductItem(defaultItem?.id);
+                FetchProductitemDetail(defaultItem?.id);
+                FetchProductAttributeValue(defaultItem?.id);
+                FetchStockQtyOfProductItem(defaultItem?.id);
+            }
+        }
+        else {
+            setSelectedProductItem(parseInt(ItemId));
+            FetchProductitemDetail(parseInt(ItemId));
+            FetchProductAttributeValue(parseInt(ItemId));
+            FetchStockQtyOfProductItem(parseInt(ItemId));
+        }
 
 
-    
+    }, [FetchedProductItems])
+
+
+
+
 
 
 
@@ -93,7 +113,7 @@ const ViewProduct = (props) => {
 
     }
 
-    const handleChangeInCurrentShowing  =  (ind)=>{
+    const handleChangeInCurrentShowing = (ind) => {
         setCurrentPhotoToDisplay(ProductItemDetails?.images[ind])
     }
 
@@ -112,15 +132,15 @@ const ViewProduct = (props) => {
                                 <div className='md:w-1/3 w-5/6 mx-auto sm:w-3/4 sm:mx-auto lg:w-1/5  md:h-auto  object-cover object-center rounded'>
                                     <img alt="ecommerce" className="object-cover object-center rounded" src={`${base_url}${CurrentPhotoToDisplay?.file_name}`} />
                                     <div className='grid grid-cols-4 mt-5 md:h-[50px]  justify-center  gap-3 '>
-                                        { ProductItemDetails.images.map((item, ind) => (
-                                            < div className='border-purple-300  border cursor-pointer' key={ind+100000} onClick={()=>{handleChangeInCurrentShowing(ind)}}>
-                                                <img src= {`${base_url}${item.file_name}`} alt="product images" className='h-full w-full'/>
+                                        {ProductItemDetails?.images.map((item, ind) => (
+                                            < div className='border-purple-300  border cursor-pointer' key={ind + 100000} onClick={() => { handleChangeInCurrentShowing(ind) }}>
+                                                <img src={`${base_url}${item.file_name}`} alt="product images" className='h-full w-full' />
                                             </div>
 
                                         ))
                                         }
                                     </div>
-                                </div>:
+                                </div> :
 
                                 <></>
                         }
@@ -205,7 +225,7 @@ const ViewProduct = (props) => {
                             <div className="grid  grid-cols-2 gap-x-4 md:grid-cols-3 pt-4  justify-between mx-0 md:flex-row  mt-2 md:items-center pb-5 border-b-2 border-gray-100 md:mb-5">
                                 <Select className='w-72 first-letter:capitalize'
                                     name="product_item"
-                                    value={FetchedProductItems?.id}
+                                    value={SelectedProductItem}
                                     onChange={handleSelectChange}
                                 >
                                     {

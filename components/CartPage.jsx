@@ -74,7 +74,7 @@ const CartPage = () => {
     const subTotalCartAmount = () => {
         let SubTotalPrice = 0
         Cart.forEach(item => {
-            SubTotalPrice = SubTotalPrice + (item.store_price * item.cart_qty)
+            SubTotalPrice = SubTotalPrice + (item.retail_price * item.cart_qty)
         });
         setsubTotalPrice(SubTotalPrice)
 
@@ -122,7 +122,7 @@ const CartPage = () => {
                                                             <div className="flex itemms-center">
                                                                 <button className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer" onClick={() => removecartItems(cartItem.id)}>Remove</button>
                                                             </div>
-                                                            <p className="text-base font-black leading-none text-gray-800">$9,000</p>
+                                                            <p className="text-base font-black leading-none text-gray-800">${cartItem?.retail_price ?? 0 }</p>
                                                         </div>
                                                     </div>
                                                 </div>

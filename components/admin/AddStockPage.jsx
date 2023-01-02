@@ -32,6 +32,10 @@ const AddStockPage = (props) => {
 
     }
 
+    const onFinishFailed = ()=>{
+        console.warn('failed');
+    }
+
     const handleSaveStock = ()=>{
         setUploading(true)
         axios.post(`${base_url}/api/stock/add-stock/`, StockInventoryData).then(

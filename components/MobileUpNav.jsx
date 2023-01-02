@@ -19,20 +19,20 @@ const MobileUpNav = () => {
     const dispatch = useDispatch()
     const router = useRouter(0)
     let authCredential = useSelector(state => state.authSlice.authCredentials)
-
+    const  site_url  =  process.env.SITE_URL
     let currentUser = useSelector(state => state.userDataSlice.currentUser)
 
 
 
     const handleLogout = () => {
-        axios.post(`api/auth/logout/`).then(res => {
+        axios.post(`${site_url}/api/auth/logout/`).then(res => {
             let result = res.data
             console.log(result);
             message.success(result.msg)
             dispatch(updateAuthCredential(null))
             dispatch(updateCurrentUser(null))
             dispatch(setCartItem([]))
-            router.push('/login')
+            router.push('/user/login')
             localStorage.removeItem('GustyAuthtokens')
         }).catch(err => {
             console.log(err);
@@ -95,8 +95,8 @@ const MobileUpNav = () => {
                             currentUser == null && authCredential == null ?
 
                                 <div className="icons ">
-                                    <Link href={'/login'}><a className=' text-white cursor-pointer bg-purple-500 text-sm hover:bg-purple-400 font-[inherit] rounded-sm p-1 mx-1 sm:text-md'>Login</a></Link>
-                                    <Link href={'/signup'}><a className=' text-white cursor-pointer bg-purple-500 text-sm hover:bg-purple-400 font-[inherit] rounded-sm p-1 mx-1 sm:text-md'>Signup</a></Link>
+                                    <Link href={'/user/login'}><a className=' text-white cursor-pointer bg-purple-500 text-sm hover:bg-purple-400 font-[inherit] rounded-sm p-1 mx-1 sm:text-md'>Login</a></Link>
+                                    <Link href={'/user/signup'}><a className=' text-white cursor-pointer bg-purple-500 text-sm hover:bg-purple-400 font-[inherit] rounded-sm p-1 mx-1 sm:text-md'>Signup</a></Link>
 
 
                                 </div>
@@ -115,10 +115,10 @@ const MobileUpNav = () => {
                                 </div>
                         }
                     </div>
-                    <div className="md:items-center md:w-auto flex md:justify-between ">
+                    <div className="md:items-center md:w-auto flex md:justify-center ">
                         <div className="flex text-sm ">
-                            <div className=' w-screen flex px-2 md:px-44 '>
-                                <input type="text" className='focus:outline-none text-black w-full rounded-sm px-1 text-lg md:px-3 md:py-2' placeholder='Search Items' />
+                            <div className=' w-screen md:w-full flex px-2  '>
+                                <input type="text" className='focus:outline-none md:w-[70vw] text-black w-full rounded-sm px-1 text-lg md:px-3 md:py-2' placeholder='Search Items' />
                                 <button type="submit" className='bg-purple-500 px-1 mx-1 rounded-sm py-1 sm:px-3'><BsSearch /></button>
                                 <Link href={'/cart'} >
                                     <a className='text-3xl mx-3 pt-1 hidden md:block relative text-white'>

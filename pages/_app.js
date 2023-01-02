@@ -7,9 +7,7 @@ import AppLayout from '../components/admin/AppLayout'
 import { useRouter } from 'next/router'
 import LoadingBar from 'react-top-loading-bar'
 import { useState, useEffect } from 'react'
-import { updateAuthCredential } from '../redux/auth/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import cookie from 'cookie';
 import axios from 'axios'
 import handleRefreshToken from '../Functions/getAutoLogin'
 import getUserData from '../Functions/getUserData'
@@ -32,7 +30,7 @@ function MyApp({ Component, pageProps }) {
     if (url.includes('admin') && !currentUser?.is_admin) {
 
       router.push({
-        pathname: '/login',
+        pathname: '/user/login',
         query: { next: `${url}` }
 
       })
@@ -62,11 +60,10 @@ function MyApp({ Component, pageProps }) {
           axios.get(`${siteURL}/api/user/cart`).then(res => {
             let cart = res.data
             if (cart.status == 200) {
-              console.log(cart.results);
               dispatch(setCartItem(cart.results))
 
             } else {
-              console.log(cart.error);
+              message.warn('Error on Cart ');
             }
           }).catch(err => {
             message.error('NETWORK ERROR ON FETCHING CART')
