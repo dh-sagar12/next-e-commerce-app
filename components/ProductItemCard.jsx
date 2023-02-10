@@ -32,10 +32,10 @@ const ProductItemCard = ({ product }) => {
                     </div>
                 </Link>
                 <div className="mt-4 flex justify-between pb-2 px-2 items-center">
-                    <Link href={`/product/${product.slug}`} passHref>
+                    <Link href={`/product/${product.slug}?item_id=${product.product_inventory_id}`} passHref>
                         <div>
                             <h3 className="text-sm text-gray-900 font-semibold">
-                                <a href={`/product/$${product.slug}`} className='text-black'>
+                                <a href={`/product/${product.slug}?item_id=${product.product_inventory_id}`} className='text-black'>
                                     {product.product_name}
                                 </a>
                             </h3>

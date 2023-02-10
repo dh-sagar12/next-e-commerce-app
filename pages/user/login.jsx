@@ -39,14 +39,13 @@ const Login = () => {
     setUploading(true)
     axios.post(`${site_url}/api/auth/login/`, LoginCredentials).then(res => {
       let result = res.data
-      console.log(result);
       result.errors ? message.error(result.errors) : ProceedAuthentication(res.data)
       setUploading(false)
 
     }).catch(err => {
       console.log(err);
       if (err.response.status == 401) {
-        message.error(err.response.data.errors)
+        message.error(err.response.data.errors) 
       }
       else {
 

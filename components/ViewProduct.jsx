@@ -7,6 +7,7 @@ import { Select, Tooltip, message } from 'antd'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import AddToCartBtn from './AddToCartBtn'
+import Router, { useRouter } from 'next/router'
 
 
 const ViewProduct = (props) => {
@@ -16,13 +17,13 @@ const ViewProduct = (props) => {
     const cartitem = useSelector(state => state.cartSlice.cart)
 
 
-
+    const router  =  useRouter()
     const base_url = process.env.baseURL
     const [FetchedProductItems, setFetchedProductItems] = useState([]) //all product item fetched 
     const [SelectedProductItem, setSelectedProductItem] = useState(0) //selected product item id 
     const [ProductItemAttributes, setProductItemAttributes] = useState() //
     const [ProductItemDetails, setProductItemDetails] = useState() //detail of selected product items
-    const [ProductItemStockQty, setProductItemStockQty] = useState()
+    const [ProductItemStockQty, setProductItemStockQty] = useState([])
     const [StockInventoryData, setStockInventoryData] = useState()
     const [AlreadyAddedProductInCart, setAlreadyAddedProductInCart] = useState()
     const [CurrentPhotoToDisplay, setCurrentPhotoToDisplay] = useState()
@@ -69,6 +70,17 @@ const ViewProduct = (props) => {
 
 
 
+    const handleBuyNow =  ()=>{
+        console.log('ProductItemDetails', ProductItemDetails);
+        router.push({
+            pathname: '/checkout',
+            query:{
+                product:FetchedProduct?.slug,
+                sku: ProductItemDetails?.id,
+                type:'only-product-checkout'
+            }
+        })        
+    }
 
 
 
@@ -212,12 +224,19 @@ const ViewProduct = (props) => {
                                 <h4 className='md:text-xl  text-lg font-bold uppercase  pl-1 border-b-2 border-purple-500 w-1/2 '>Item Options</h4>
                                 <div className="  items-center">
                                     <span className="title-font font-medium text-xl text-gray-900"> ${ProductItemDetails?.retail_price ?? 0}</span>
-                                    <button className="flex items-center hover:bg-purple-400 text-white bg-purple-500 border-0 py-2 px-2 focus:outline-none  rounded">
-                                        <span className='mr-2'>
-                                            <BsCartPlus />
-                                        </span>
-                                        <span>Buy Now</span>
-                                    </button>
+                                    {
+                                        parseInt(ProductItemStockQty[0]?.stock_qty) > 0 ?
+                                            <button className="flex items-center hover:bg-purple-400 text-white bg-purple-500 border-0 py-2 px-2 focus:outline-none  rounded lg:px-5" onClick={handleBuyNow}>
+                                                <span className='mr-2'>
+                                                    <BsCartPlus />
+                                                </span>
+                                                <span>Buy Now</span>
+                                            </button>
+                                            :
+                                            <button className="flex items-center cursor-not-allowed  text-white bg-gray-400 border-0 py-2  px-2 lg:px-5 focus:outline-none  rounded  ">
+                                                <span>Out Of Stock</span>
+                                            </button>
+                                    }
                                 </div>
                             </div>
 
@@ -264,7 +283,7 @@ const ViewProduct = (props) => {
                                         <p className='font-semibold'>Status: {ProductItemDetails.is_active ? 'Active' : 'Inactive'}</p>
                                         {
                                             SelectedProductItem > 0 && ProductItemStockQty !== undefined ?
-                                                <p className='font-semibold'>Qty Available: {ProductItemStockQty[0].stock_qty}</p>
+                                                <p className='font-semibold'>Qty Available: {ProductItemStockQty[0]?.stock_qty}</p>
                                                 : <></>
                                         }
                                     </div>

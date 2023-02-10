@@ -148,6 +148,10 @@ const Signup = () => {
                     required: true,
                     message: 'Please Enter Your Email!!'
                   },
+                  {
+                    type:"email", 
+                    message: "This is not a valid Email"
+                  }
                 ]}
               >
                 <Input className="lg:w-full" />

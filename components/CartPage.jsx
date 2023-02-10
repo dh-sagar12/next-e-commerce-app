@@ -6,6 +6,7 @@ import { increasecartItemvalue, decreasecartItemvalue, removeItem } from '../red
 import Scrollbars from 'react-custom-scrollbars-2';
 import axios from 'axios';
 import { message } from 'antd';
+import { useRouter } from 'next/router';
 
 
 
@@ -14,6 +15,7 @@ const CartPage = () => {
     const [subTotalPrice, setsubTotalPrice] = useState(0)
     const dispatch = useDispatch();
     const base_url = process.env.baseURL
+    const router  =  useRouter()
     useEffect(() => {
         subTotalCartAmount()
     }, [Cart])
@@ -79,6 +81,18 @@ const CartPage = () => {
         setsubTotalPrice(SubTotalPrice)
 
     }
+
+
+
+    const handleBuyNow = () => {
+        router.push({
+            pathname: '/checkout',
+            query: {
+                type: 'cart-checkout'
+            }
+        })
+    }
+
     return (
         <>
             <div className="min-h-screen md:mx-7">
@@ -109,7 +123,7 @@ const CartPage = () => {
                                                             <div className='text-base flex space-x-2 mt-1 py-2 px-1'>
                                                                 <button className={cartItem.cart_qty > 1 ? 'cursor-pointer' : 'cursor-not-allowed'} onClick={() => decreaseCartValue(cartItem.id, cartItem.cart_qty)}><AiOutlineMinus /></button>
                                                                 <input type="text" className='w-12 pl-5 border border-purple-400' value={cartItem.cart_qty} readOnly />
-                                                                <button onClick={() => increaseCartValue(cartItem.id, cartItem.cart_qty)}><AiOutlinePlus /></button>
+                                                                <button disabled={parseInt(cartItem.cart_qty) < parseInt(cartItem.stock_qty) ? false : true} className={cartItem.cart_qty < parseInt(cartItem.stock_qty) ? 'cursor-pointer' : 'cursor-not-allowed '} onClick={() => increaseCartValue(cartItem.id, cartItem.cart_qty)}><AiOutlinePlus /></button>
                                                             </div>
                                                         </div>
                                                         {
@@ -122,7 +136,7 @@ const CartPage = () => {
                                                             <div className="flex itemms-center">
                                                                 <button className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer" onClick={() => removecartItems(cartItem.id)}>Remove</button>
                                                             </div>
-                                                            <p className="text-base font-black leading-none text-gray-800">${cartItem?.retail_price ?? 0 }</p>
+                                                            <p className="text-base font-black leading-none text-gray-800">${cartItem?.retail_price ?? 0}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -148,7 +162,7 @@ const CartPage = () => {
 
                             </div>
                             <div className='mt-3'>
-                                <button className='w-full px-4 py-3 bg-purple-500 text-lg hover:bg-purple-600 font-semibold  duration-100 transition-all text-white shadow-md rounded-md'>CheckOut</button>
+                                <button className='w-full px-4 py-3 bg-purple-500 text-lg hover:bg-purple-600 font-semibold  duration-100 transition-all text-white shadow-md rounded-md' onClick={handleBuyNow}>CheckOut</button>
                             </div>
                         </div>
                     </div>
