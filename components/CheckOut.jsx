@@ -1,7 +1,7 @@
 import { Button, Form, Input, Radio, Spin, Modal } from 'antd'
 import React from 'react'
 import { AiOutlineUser } from 'react-icons/ai';
-import { BsEnvelope, BsEnvelopeFill } from 'react-icons/bs';
+import { BsEnvelope } from 'react-icons/bs';
 import { FaCity, FaLandmark, FaRegAddressCard } from 'react-icons/fa';
 import Scrollbars from 'react-custom-scrollbars-2';
 import { useRouter } from 'next/router';
@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import { message } from 'antd';
+
 
 
 const CheckOut = (props) => {
@@ -39,9 +40,8 @@ const CheckOut = (props) => {
 
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
-    const [modalText, setModalText] = useState('Content of the modal');
     const [PaymentMethodId, setPaymentMethodId] = useState()
-    const [PaymentStatus, setPaymentStatus] = useState(false)
+    // const [PaymentStatus, setPaymentStatus] = useState(false)
 
 
 
@@ -57,14 +57,6 @@ const CheckOut = (props) => {
         }
 
     }, [router.isReady])
-
-
-    // useEffect(() => {
-    //     console.log(SingleOrderInformation);
-    //     console.log(ShipLocationDetails);
-
-    // }, [SingleOrderInformation, ShipLocationDetails])
-
 
 
     const ProceedSingleProductCheckOut = (slug, sku) => {
@@ -148,7 +140,6 @@ const CheckOut = (props) => {
 
             }
         }
-        console.log(checkout_data);
 
         axios.post('/api/user/placeorder', checkout_data).then(res => {
             let resData = res.data
@@ -157,8 +148,7 @@ const CheckOut = (props) => {
                 message.success(resData.msg);
                 setOpen(false);
                 setConfirmLoading(false);
-                router.push('/')
-                // router.reload()
+                window.location.href = '/'
             }
             else {
                 message.error(resData.msg)
@@ -167,12 +157,12 @@ const CheckOut = (props) => {
             }
 
         }).catch(err => {
-            message.error(err.response.data.error)
+            // message.error(err.response.data.error)
+            console.log(err);
             setOpen(false);
             setConfirmLoading(false);
         })
 
-        // console.log(checkout_data);
 
     }
 
@@ -191,7 +181,6 @@ const CheckOut = (props) => {
         setShipLocationDetails(ShippingDetail[0])
         form.setFieldsValue(ShippingDetail[0])
 
-        console.log('loading');
     }
 
 
@@ -210,13 +199,11 @@ const CheckOut = (props) => {
 
 
     const handleCancel = () => {
-        console.log('Clicked cancel button');
         setOpen(false);
     };
 
 
     const changePaymentMethodId = ({ target: { value } }) => {
-        console.log(value);
         setPaymentMethodId(value)
         if (CheckOuType == 'only-product-checkout') {
             setSingleOrderInformation(preval => {
@@ -237,7 +224,6 @@ const CheckOut = (props) => {
                     }
                 )
             })
-            console.log('checkoutCart', checkout_cart);
             setCartOrderInformation(checkout_cart)
 
         }

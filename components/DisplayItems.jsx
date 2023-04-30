@@ -49,7 +49,7 @@ const DisplayItems = (props) => {
     <>
 
       <div className="bg-slate-50 md:py-6">
-        <div className="max-w-2xl mx-auto pt-16 pb-0 px-4 sm:pt-10 md:mx-16 sm:mx-auto  lg:max-w-7xl ">
+        <div className="max-w-2xl mx-auto pt-16 pb-0 px-4 sm:pt-10 md:mx-10 sm:mx-auto  lg:max-w-full ">
           <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Item For You</h2>
 
           {
@@ -67,7 +67,7 @@ const DisplayItems = (props) => {
                   </div>
                 }
               >
-                <div className="mt-6  grid grid-cols-2 gap-y-8 gap-x-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:gap-x-8">
+                <div className="mt-6  grid grid-cols-2 gap-y-8 gap-x-3 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:gap-x-8">
                   {
                     FetchedProductState.map((product) => {
                       return (
